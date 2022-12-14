@@ -34,17 +34,31 @@ namespace NoThanks.Runtime.Infrastructure
             {
                 var card = await dealer.FlipOverTopCard();
 
-                bool takeCard = false;
-                do
+                var takeCard = false;
+                while(!takeCard)
+                    takeCard = await AskNextPlayer();
+
+                async Task<bool> AskNextPlayer()
                 {
-                    takeCard = await table.ListenIfTakeCard(players[currentPlayer]);
+                    if(!players[currentPlayer].CanDecide())
+                        takeCard = true;
+                    else
+                        takeCard = await table.ListenIfTakeCard(players[currentPlayer]);
 
                     if(takeCard)
                         await dealer.GiveCardTo(players[currentPlayer], card);
                     else
                         await dealer.AskPlayerForCounter(players[currentPlayer], card);
+                    
+                    if(!takeCard)
+                        GoToNextPlayer();
+                    return takeCard;
+                }
+
+                void GoToNextPlayer()
+                {
                     currentPlayer = (currentPlayer + 1) % players.Length;
-                } while(!takeCard);
+                }
             }
         }
 

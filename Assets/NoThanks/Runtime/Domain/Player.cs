@@ -21,6 +21,11 @@ namespace NoThanks.Runtime.Domain
             return cards.Sum(c => c.Points) +
                    counters.Sum(c => c.Points);
         }
+
+        public bool CanDecide()
+        {
+            return counters.Count > 0;
+        }
         
         public void SupplyCounter()
         {
@@ -38,16 +43,16 @@ namespace NoThanks.Runtime.Domain
             counters.RemoveAt(0);
         }
 
-        public override string ToString()
-        {
-            return id;
-        }
-
         public void TakeCard(PlayingCard card)
         {
             cards.Add(card.card);
             for(var i = 0; i < card.counters; i++)
                 counters.Add(new Counter());
+        }
+        
+        public override string ToString()
+        {
+            return id;
         }
     }
 }

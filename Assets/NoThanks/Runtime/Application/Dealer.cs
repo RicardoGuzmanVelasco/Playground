@@ -9,11 +9,11 @@ namespace NoThanks.Runtime.Application
     public class Dealer
     {
         Deck deck;
-        readonly Table view;
+        readonly Table table;
         
-        public Dealer(Table view)
+        public Dealer(Table table)
         {
-            this.view = view;
+            this.table = table;
         }
 
         public async Task SupplyCounters(params Player[] players)
@@ -29,7 +29,7 @@ namespace NoThanks.Runtime.Application
             foreach(var player in players)
             {
                 player.SupplyCounters(counters);
-                await view.SupplyCountersToPlayer(counters, player);
+                await table.SupplyCountersToPlayer(counters, player);
             }
         }
 
@@ -42,14 +42,14 @@ namespace NoThanks.Runtime.Application
             ExcludeNineCards(cards);
 
             deck = new Deck(cards);
-            await view.FormDeck(deck);
+            await table.FormDeck(deck);
             return deck;
         }
 
         public async Task<PlayingCard> FlipOverTopCard()
         {
             var card = deck.FlipOver();
-            await view.Show(card);
+            await table.Show(card);
             return new PlayingCard(card);
         }
 
@@ -79,13 +79,14 @@ namespace NoThanks.Runtime.Application
         public Task GiveCardTo(Player player, PlayingCard card)
         {
             player.TakeCard(card);
-            return view.GiveCardToPlayer(card, player);
+            return table.GiveCardToPlayer(card, player);
         }
 
-        public async Task AskPlayerForCounter(Player player, PlayingCard card)
+        public Task AskPlayerForCounter(Player player, PlayingCard card)
         {
             player.SubstractCounter();
             card.counters++;
+            return table.PutCounterOnCard(card, player);
         }
     }
 }

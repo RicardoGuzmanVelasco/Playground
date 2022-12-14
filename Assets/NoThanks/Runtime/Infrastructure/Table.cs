@@ -36,5 +36,11 @@ namespace NoThanks.Runtime.Infrastructure
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} se come un {card} y {card.counters} fichas";
             return Task.Delay(TimeSpan.FromSeconds(1.5f));
         }
+
+        public Task PutCounterOnCard(PlayingCard card, Player player)
+        {
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} ha puesto una ficha y ahora el {card} tiene {card.counters} fichas";
+            return Task.Delay(TimeSpan.FromSeconds(1.5f));
+        }
     }
 }
