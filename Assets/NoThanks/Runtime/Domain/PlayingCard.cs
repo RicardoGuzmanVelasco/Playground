@@ -4,22 +4,22 @@ namespace NoThanks.Runtime.Domain
 {
     public class PlayingCard
     {
-        public Card card;
-        public int counters;
+        public Card Card { get; }
+        public int Counters { get; private set; }
         
         public PlayingCard(Card card)
         {
-            this.card = card;
+            this.Card = card;
         }
 
         public void PutOntoOneCounter()
         {
-            counters++;
+            Counters++;
         }
         
         public override string ToString()
         {
-            return card.ToString();
+            return Card.ToString();
         }
     }
 }

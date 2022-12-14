@@ -8,22 +8,22 @@ namespace NoThanks.Runtime.Domain
     {
         readonly string id;
 
-        readonly List<Card> cards = new();
+        readonly CardGroups cards = new();
         readonly List<Counter> counters = new();
-        
+
         public Player(string id)
         {
             this.id = id;
         }
-        
-        public override int Points => cards.Sum(c => c.Points) + counters.Sum(c => c.Points);
-        
+
+        public override int Points => cards.Points + counters.Sum(c => c.Points);
+
 
         public bool CanDecide()
         {
             return counters.Count > 0;
         }
-        
+
         public void SupplyCounter()
         {
             counters.Add(new Counter());
@@ -42,11 +42,11 @@ namespace NoThanks.Runtime.Domain
 
         public void TakeCard(PlayingCard card)
         {
-            cards.Add(card.card);
-            for(var i = 0; i < card.counters; i++)
+            cards.Add(card.Card);
+            for(var i = 0; i < card.Counters; i++)
                 counters.Add(new Counter());
         }
-        
+
         public override string ToString()
         {
             return id;

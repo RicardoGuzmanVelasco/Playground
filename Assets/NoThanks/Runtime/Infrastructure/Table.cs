@@ -33,13 +33,13 @@ namespace NoThanks.Runtime.Infrastructure
 
         public Task GiveCardToPlayer(PlayingCard card, Player player)
         {
-            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} se come un {card} y {card.counters} fichas";
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} se come un {card} y {card.Counters} fichas";
             return Task.Delay(TimeSpan.FromSeconds(1.5f));
         }
 
         public Task PutCounterOnCard(PlayingCard card, Player player)
         {
-            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} ha puesto una ficha y ahora el {card} tiene {card.counters} fichas";
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} ha puesto una ficha y ahora el {card} tiene {card.Counters} fichas";
             return Task.Delay(TimeSpan.FromSeconds(1.5f));
         }
 

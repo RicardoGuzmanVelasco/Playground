@@ -13,6 +13,7 @@ namespace NoThanks.Runtime.Infrastructure
             tcs = new TaskCompletionSource<KeyCode>();
 
             var result = await tcs.Task;
+            tcs = null;
 
             return result == KeyCode.RightArrow;
         }
