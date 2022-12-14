@@ -15,9 +15,10 @@ namespace NoThanks.Runtime.Infrastructure
 
             var table = new Table();
 
-            var supply = new SupplyCounters(table);
+            var dealer = new Dealer(table);
 
-            await supply.Execute(player1, player2, player3);
+            var stack = await dealer.ShuffleStack();
+            await dealer.SupplyCounters(player1, player2, player3);
         }
     }
 }
