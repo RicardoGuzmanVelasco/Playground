@@ -2,6 +2,6 @@
 {
     public class Score
     {
-        public int Points { get; protected set; }
+        public virtual int Points { get; protected set; }
     }
 }

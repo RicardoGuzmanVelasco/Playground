@@ -1,24 +1,40 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NoThanks.Runtime.Domain
 {
     public class Player
     {
-        List<Card> cards;
-        List<Counter> counters;
+        readonly string id;
+
+        readonly List<Card> cards = new();
+        readonly List<Counter> counters = new();
+        
+        public Player(string id)
+        {
+            this.id = id;
+        }
         
         public int Score()
         {
-            var score = 0;
-            foreach (var card in cards)
-            {
-                score += card.Points;
-            }
-            foreach (var counter in counters)
-            {
-                score -= counter.Points;
-            }
-            return score;
+            return cards.Sum(c => c.Points) +
+                   counters.Sum(c => c.Points);
+        }
+        
+        public void SupplyCounter()
+        {
+            counters.Add(new Counter());
+        }
+
+        public void SupplyCounters(int howMany)
+        {
+            for(var i = 0; i < howMany; i++)
+                counters.Add(new Counter());
+        }
+
+        public override string ToString()
+        {
+            return id;
         }
     }
 }
