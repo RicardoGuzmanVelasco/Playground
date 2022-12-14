@@ -61,7 +61,7 @@ namespace NoThanks.Runtime.Infrastructure
 
         static async Task<Deck> Setup(Dealer dealer)
         {
-            var stack = await dealer.ShuffleStack();
+            var stack = await dealer.SetupDeck();
             await dealer.SupplyCounters();
             return stack;
         }

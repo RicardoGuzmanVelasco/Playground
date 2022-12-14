@@ -37,15 +37,12 @@ namespace NoThanks.Runtime.Application
             }
         }
 
-        public async Task<Deck> ShuffleStack()
+        public async Task<Deck> SetupDeck()
         {
-            var random = new Random();
-            
-            var cards = new List<Card>(Deck.AllAvailableCards());
-            Shuffle(cards, random);
-            ExcludeNineCards(cards);
+            deck = Deck.Complete();
+            deck.Shuffle(new Random());
+            deck.DiscardSurplus();
 
-            deck = new Deck(cards);
             await table.SetupDeck(deck);
             return deck;
         }
@@ -55,21 +52,6 @@ namespace NoThanks.Runtime.Application
             var card = deck.FlipOver();
             await table.Show(card);
             return new PlayingCard(card);
-        }
-
-        static void ExcludeNineCards(List<Card> cards)
-        {
-            for(var i = 0; i < 9; i++)
-                cards.RemoveAt(0);
-        }
-
-        static void Shuffle(List<Card> cards, Random random)
-        {
-            for(var i = 0; i < cards.Count; i++)
-            {
-                var j = random.Next(i, cards.Count);
-                (cards[i], cards[j]) = (cards[j], cards[i]);
-            }
         }
 
         public Task GiveCardTo(Player player, PlayingCard card)
