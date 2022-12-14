@@ -1,7 +1,9 @@
-﻿namespace NoThanks.Runtime.Application
+﻿using System.Threading.Tasks;
+
+namespace NoThanks.Runtime.Application
 {
-    public class PlayStrategy
+    public abstract class PlayStrategy
     {
-        
+        public abstract Task<bool> ListenIfTakeCard();
     }
 }

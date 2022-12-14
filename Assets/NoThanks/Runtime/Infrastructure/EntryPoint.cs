@@ -9,7 +9,7 @@ namespace NoThanks.Runtime.Infrastructure
     {
         async void Start()
         {
-            var players = new Player[]
+            var players = new[]
             {
                 new Player("Posadas"),
                 new Player("Rocío"),
@@ -17,6 +17,10 @@ namespace NoThanks.Runtime.Infrastructure
             };
 
             var table = new Table();
+            table.Add(players[0], new TotallyRandom());
+            table.Add(players[1], new TotallyRandom());
+            table.Add(players[2], new LocalHuman());
+            
             var dealer = new Dealer(table, players);
 
             var deck = await Setup(dealer);

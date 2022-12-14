@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using NoThanks.Runtime.Application;
 using NoThanks.Runtime.Domain;
 using TMPro;
 
@@ -7,6 +9,13 @@ namespace NoThanks.Runtime.Infrastructure
 {
     public class Table
     {
+        readonly Dictionary<Player, PlayStrategy> playerStrategies = new();
+        
+        public void Add(Player player, PlayStrategy strategy)
+        {
+            playerStrategies.Add(player, strategy);
+        }
+
         public Task SupplyCountersToPlayer(int howMany, Player player)
         {
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} ahora tiene {howMany} fichas";
@@ -28,7 +37,7 @@ namespace NoThanks.Runtime.Infrastructure
         public Task<bool> ListenIfTakeCard(Player player)
         {
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"Qué haces, {player}";
-            return UnityEngine.Object.FindObjectOfType<ListenInput>().ListenIfTakeCard();
+            return playerStrategies[player].ListenIfTakeCard();
         }
 
         public Task GiveCardToPlayer(PlayingCard card, Player player)
