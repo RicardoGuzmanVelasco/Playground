@@ -46,10 +46,11 @@ namespace NoThanks.Runtime.Application
             return deck;
         }
 
-        public Task FlipOverTopCard()
+        public async Task<PlayingCard> FlipOverTopCard()
         {
             var card = deck.FlipOver();
-            return view.Show(card);
+            await view.Show(card);
+            return new PlayingCard(card);
         }
 
         static void ExcludeNineCards(List<Card> cards)
@@ -73,6 +74,18 @@ namespace NoThanks.Runtime.Application
             for(var i = 3; i <= 35; i++)
                 result.Add(new Card(i));
             return result;
+        }
+
+        public Task GiveCardTo(Player player, PlayingCard card)
+        {
+            player.TakeCard(card);
+            return view.GiveCardToPlayer(card, player);
+        }
+
+        public async Task AskPlayerForCounter(Player player, PlayingCard card)
+        {
+            player.SubstractCounter();
+            card.counters++;
         }
     }
 }

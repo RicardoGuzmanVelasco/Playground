@@ -30,5 +30,11 @@ namespace NoThanks.Runtime.Infrastructure
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"Qué haces, {player}";
             return UnityEngine.Object.FindObjectOfType<ListenInput>().ListenIfTakeCard();
         }
+
+        public Task GiveCardToPlayer(PlayingCard card, Player player)
+        {
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} se come un {card} y {card.counters} fichas";
+            return Task.Delay(TimeSpan.FromSeconds(1.5f));
+        }
     }
 }

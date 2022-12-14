@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NoThanks.Runtime.Infrastructure;
 
 namespace NoThanks.Runtime.Domain
 {
@@ -32,9 +33,21 @@ namespace NoThanks.Runtime.Domain
                 counters.Add(new Counter());
         }
 
+        public void SubstractCounter()
+        {
+            counters.RemoveAt(0);
+        }
+
         public override string ToString()
         {
             return id;
+        }
+
+        public void TakeCard(PlayingCard card)
+        {
+            cards.Add(card.card);
+            for(var i = 0; i < card.counters; i++)
+                counters.Add(new Counter());
         }
     }
 }

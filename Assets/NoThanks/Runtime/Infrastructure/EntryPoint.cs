@@ -27,16 +27,24 @@ namespace NoThanks.Runtime.Infrastructure
             var currentPlayer = 0;
             while(!deck.IsGone())
             {
-                await PlayRound(currentPlayer, deck);
-                currentPlayer = (currentPlayer + 1) % players.Length;
+                await PlayRound();
             }
 
-            async Task PlayRound(int currentPlayer, Deck deck)
+            async Task PlayRound()
             {
-                await dealer.FlipOverTopCard();
-                var takeCard = await table.ListenIfTakeCard(players[currentPlayer]);
-                UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{players[currentPlayer]} elige quedarse la carta: {takeCard}";
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                var card = await dealer.FlipOverTopCard();
+
+                bool takeCard = false;
+                do
+                {
+                    takeCard = await table.ListenIfTakeCard(players[currentPlayer]);
+
+                    if(takeCard)
+                        await dealer.GiveCardTo(players[currentPlayer], card);
+                    else
+                        await dealer.AskPlayerForCounter(players[currentPlayer], card);
+                    currentPlayer = (currentPlayer + 1) % players.Length;
+                } while(!takeCard);
             }
         }
 
