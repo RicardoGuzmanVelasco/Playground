@@ -8,6 +8,7 @@ namespace NoThanks.Runtime.Application
 {
     public class Dealer
     {
+        Deck deck;
         readonly Table view;
         
         public Dealer(Table view)
@@ -40,9 +41,15 @@ namespace NoThanks.Runtime.Application
             Shuffle(cards, random);
             ExcludeNineCards(cards);
 
-            var deck = new Deck(cards);
+            deck = new Deck(cards);
             await view.FormDeck(deck);
             return deck;
+        }
+
+        public Task FlipOverTopCard()
+        {
+            var card = deck.FlipOver();
+            return view.Show(card);
         }
 
         static void ExcludeNineCards(List<Card> cards)

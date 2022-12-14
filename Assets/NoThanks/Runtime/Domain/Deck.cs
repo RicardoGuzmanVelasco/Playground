@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NoThanks.Runtime.Domain
 {
     public class Deck : IEnumerable<Card>
     {
-        //tiene una colección de cards
-        //tienen que ser 33 menos 9 que se excluyen antes.
-        //le pides flip over y te devuelve la carta que está en la parte superior.
-        //le puedes preguntar si is gone.
-        
-        private readonly IReadOnlyList<Card> cards;
+        readonly List<Card> cards;
         
         public Deck(IReadOnlyList<Card> cards)
         {
-            this.cards = cards;
+            this.cards = cards.ToList();
         }
         
         public Card FlipOver()
         {
-            throw new NotImplementedException();
+            var card = cards[0];
+            cards.RemoveAt(0);
+            return card;
         }
         
         public bool IsGone()
         {
-            throw new NotImplementedException();
+            return cards.Count == 0;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
