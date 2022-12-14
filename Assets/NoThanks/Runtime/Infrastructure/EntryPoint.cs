@@ -26,9 +26,9 @@ namespace NoThanks.Runtime.Infrastructure
 
             var currentPlayer = 0;
             while(!deck.IsGone())
-            {
                 await PlayRound();
-            }
+
+            await dealer.AddsPointsUp(players);
 
             async Task PlayRound()
             {

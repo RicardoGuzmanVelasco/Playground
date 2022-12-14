@@ -14,7 +14,7 @@ namespace NoThanks.Tests
             
             player.SupplyCounter();
 
-            player.Score().Should().BeNegative();
+            player.Points.Should().BeNegative();
         }
         
         [Test]
@@ -22,7 +22,7 @@ namespace NoThanks.Tests
         {
             var player = new Player("player1");
             
-            player.Score().Should().BeGreaterOrEqualTo(0);
+            player.Points.Should().BeGreaterOrEqualTo(0);
         }
     }
 }

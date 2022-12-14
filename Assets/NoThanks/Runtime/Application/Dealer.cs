@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NoThanks.Runtime.Domain;
 using NoThanks.Runtime.Infrastructure;
@@ -87,6 +88,17 @@ namespace NoThanks.Runtime.Application
             player.SubstractCounter();
             card.counters++;
             return table.PutCounterOnCard(card, player);
+        }
+
+        public async Task AddsPointsUp(IReadOnlyList<Player> players)
+        {
+            await table.NotifyGameOver();
+
+            foreach(var player in players)
+                await table.ShowPointsOf(player);
+
+            var winner = players.OrderBy(p => p.Points).First();
+            await table.NotifyWinner(winner);
         }
     }
 }

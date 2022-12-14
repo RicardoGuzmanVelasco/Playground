@@ -4,7 +4,7 @@ using NoThanks.Runtime.Infrastructure;
 
 namespace NoThanks.Runtime.Domain
 {
-    public class Player
+    public class Player : Score
     {
         readonly string id;
 
@@ -16,11 +16,8 @@ namespace NoThanks.Runtime.Domain
             this.id = id;
         }
         
-        public int Score()
-        {
-            return cards.Sum(c => c.Points) +
-                   counters.Sum(c => c.Points);
-        }
+        public override int Points => cards.Sum(c => c.Points) + counters.Sum(c => c.Points);
+        
 
         public bool CanDecide()
         {

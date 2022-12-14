@@ -42,5 +42,23 @@ namespace NoThanks.Runtime.Infrastructure
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} ha puesto una ficha y ahora el {card} tiene {card.counters} fichas";
             return Task.Delay(TimeSpan.FromSeconds(1.5f));
         }
+
+        public Task NotifyGameOver()
+        {
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = "Ya estaría";
+            return Task.Delay(TimeSpan.FromSeconds(1f));
+        }
+
+        public Task ShowPointsOf(Player player)
+        {
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"{player} tiene {player.Points} puntos";
+            return Task.Delay(TimeSpan.FromSeconds(1f));
+        }
+
+        public Task NotifyWinner(Player winner)
+        {
+            UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"Ha ganao {winner}";
+            return Task.Delay(TimeSpan.FromSeconds(1f));
+        }
     }
 }
