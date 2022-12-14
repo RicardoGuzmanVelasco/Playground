@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NoThanks.Runtime.Domain
+﻿namespace NoThanks.Runtime.Domain
 {
     public class PlayingCard
     {

@@ -13,7 +13,7 @@ namespace NoThanks.Runtime.Infrastructure
             return Task.Delay(TimeSpan.FromSeconds(.5f));
         }
 
-        public async Task FormDeck(Deck deck)
+        public async Task SetupDeck(Deck deck)
         {
                 UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"Ya han barajao.";
                 await Task.Delay(TimeSpan.FromSeconds(0.5f));
@@ -22,7 +22,7 @@ namespace NoThanks.Runtime.Infrastructure
         public async Task Show(Card card)
         {
             UnityEngine.Object.FindObjectOfType<TMP_Text>().text = $"Ha salío el {card}";
-            await Task.Delay(TimeSpan.FromSeconds(2));
+            await Task.Delay(TimeSpan.FromSeconds(1));
         }
 
         public Task<bool> ListenIfTakeCard(Player player)

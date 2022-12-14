@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using NoThanks.Runtime.Application;
 using NoThanks.Runtime.Domain;
-using TMPro;
 using UnityEngine;
 
 namespace NoThanks.Runtime.Infrastructure
