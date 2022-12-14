@@ -8,11 +8,17 @@ namespace NoThanks.Runtime.Domain
     {
         readonly List<Card> cards;
         
-        public Deck(IReadOnlyList<Card> cards)
+        public Deck(IEnumerable<Card> cards)
         {
             this.cards = cards.ToList();
         }
-        
+
+        public static IEnumerable<Card> AllAvailableCards()
+        {
+            for(var i = 3; i <= 35; i++)
+                yield return new Card(i);
+        }
+
         public Card FlipOver()
         {
             var card = cards[0];

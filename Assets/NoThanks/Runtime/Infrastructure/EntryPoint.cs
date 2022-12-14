@@ -17,15 +17,15 @@ namespace NoThanks.Runtime.Infrastructure
             };
 
             var table = new Table();
-            var dealer = new Dealer(table);
+            var dealer = new Dealer(table, players);
 
-            var deck = await Setup(dealer, players);
+            var deck = await Setup(dealer);
 
             var currentPlayer = 0;
             while(!deck.IsGone())
                 await PlayRound();
 
-            await dealer.AddsPointsUp(players);
+            await dealer.AddsPointsUp();
 
             async Task PlayRound()
             {
@@ -59,10 +59,10 @@ namespace NoThanks.Runtime.Infrastructure
             }
         }
 
-        static async Task<Deck> Setup(Dealer dealer, params Player[] players)
+        static async Task<Deck> Setup(Dealer dealer)
         {
             var stack = await dealer.ShuffleStack();
-            await dealer.SupplyCounters(players);
+            await dealer.SupplyCounters();
             return stack;
         }
     }

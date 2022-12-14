@@ -10,14 +10,17 @@ namespace NoThanks.Runtime.Application
     public class Dealer
     {
         Deck deck;
+        readonly Player[] players;
+
         readonly Table table;
         
-        public Dealer(Table table)
+        public Dealer(Table table, IEnumerable<Player> players)
         {
             this.table = table;
+            this.players = players.ToArray();
         }
 
-        public async Task SupplyCounters(params Player[] players)
+        public async Task SupplyCounters()
         {
             var counters = players.Length switch
             {
@@ -38,12 +41,12 @@ namespace NoThanks.Runtime.Application
         {
             var random = new Random();
             
-            var cards = CreateCards();
+            var cards = new List<Card>(Deck.AllAvailableCards());
             Shuffle(cards, random);
             ExcludeNineCards(cards);
 
             deck = new Deck(cards);
-            await table.FormDeck(deck);
+            await table.SetupDeck(deck);
             return deck;
         }
 
@@ -69,14 +72,6 @@ namespace NoThanks.Runtime.Application
             }
         }
 
-        List<Card> CreateCards()
-        {
-            var result = new List<Card>();
-            for(var i = 3; i <= 35; i++)
-                result.Add(new Card(i));
-            return result;
-        }
-
         public Task GiveCardTo(Player player, PlayingCard card)
         {
             player.TakeCard(card);
@@ -90,7 +85,7 @@ namespace NoThanks.Runtime.Application
             return table.PutCounterOnCard(card, player);
         }
 
-        public async Task AddsPointsUp(IReadOnlyList<Player> players)
+        public async Task AddsPointsUp()
         {
             await table.NotifyGameOver();
 
