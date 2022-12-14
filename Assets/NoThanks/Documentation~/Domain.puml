@@ -1,0 +1,34 @@
+﻿@startuml
+skin rose
+
+rectangle Counter <<chip>>
+rectangle Card
+rectangle Player
+rectangle Game
+rectangle Point
+rectangle Consecutive
+rectangle Score
+rectangle Stack
+
+
+Card --> "3..35" Point
+Counter --> "-1" Point
+
+Game *-- Stack
+Stack *-- Card
+
+Game *-- "3..7" Player
+
+Player *--- Counter : hidden\nor\nshown
+Player *--- "0..*" Card : takes
+
+Card ..> Consecutive : groups in
+
+Consecutive -> Point : only the lesser
+
+Player *-- Score
+
+Score --> Point : {consecutives-counters}
+
+
+@enduml

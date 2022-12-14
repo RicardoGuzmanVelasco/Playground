@@ -1,0 +1,42 @@
+﻿@startuml
+skin rose
+
+state Setup{
+    state Shuffle{
+        state ExcludeCards{
+        }
+    }
+    state FormStack
+    state SupplyCounters{
+    }
+    
+    [*] -> Shuffle
+    Shuffle -> FormStack
+    FormStack -> SupplyCounters
+    SupplyCounters -> [*]
+}
+
+state Round{
+    state FlipOverFromStack
+        state TakeCard
+        state PutCounter
+        
+        state C1 <<choice>>
+        
+        FlipOverFromStack -> C1
+        
+        C1 --> TakeCard
+        C1 -> PutCounter
+        
+        TakeCard --> FlipOverFromStack
+        PutCounter --> C1 : next player
+    
+    [*] -> FlipOverFromStack : {starts by\nolder player}
+}
+
+[*] --> Setup
+Setup --> Round
+
+Round --> [*] : stack is gone\n{after 24 rounds}
+
+@enduml
