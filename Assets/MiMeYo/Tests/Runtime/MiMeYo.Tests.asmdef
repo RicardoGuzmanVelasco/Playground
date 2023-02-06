@@ -1,0 +1,25 @@
+{
+  "allowUnsafeCode": false,
+  "autoReferenced": true,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "excludePlatforms": [],
+  "includePlatforms": [],
+  "name": "MiMeYo.Tests",
+  "noEngineReferences": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "nunit.framework.dll",
+    "NSubstitute.dll"
+  ],
+  "references": [
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner",
+    "BoundfoxStudios.FluentAssertions",
+    "MiMeYo",
+    "MiMeYo.Infrastructure"
+  ],
+  "rootNamespace": "",
+  "versionDefines": []
+}

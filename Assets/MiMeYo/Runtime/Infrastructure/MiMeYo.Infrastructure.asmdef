@@ -1,0 +1,16 @@
+{
+  "allowUnsafeCode": false,
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "excludePlatforms": [],
+  "includePlatforms": [],
+  "name": "MiMeYo.Infrastructure",
+  "noEngineReferences": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "references": [
+    "MiMeYo.Domain"
+  ],
+  "rootNamespace": "",
+  "versionDefines": []
+}
