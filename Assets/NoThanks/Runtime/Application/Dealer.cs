@@ -63,7 +63,7 @@ namespace NoThanks.Runtime.Application
         public Task AskPlayerForCounter(Player player, PlayingCard card)
         {
             player.SubstractCounter();
-            card.PutOntoOneCounter();
+            card.PutOneCounterOnto();
             return table.PutCounterOnCard(card, player);
         }
 

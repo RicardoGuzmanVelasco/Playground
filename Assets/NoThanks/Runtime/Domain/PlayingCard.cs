@@ -10,7 +10,7 @@
             this.Card = card;
         }
 
-        public void PutOntoOneCounter()
+        public void PutOneCounterOnto()
         {
             Counters++;
         }
