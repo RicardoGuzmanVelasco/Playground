@@ -1,14 +1,18 @@
 {
-  "allowUnsafeCode": false,
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "excludePlatforms": [],
-  "includePlatforms": [],
-  "name": "EverythingIsQuiet",
-  "noEngineReferences": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "references": [],
-  "rootNamespace": "",
-  "versionDefines": []
+    "name": "EverythingIsQuiet",
+    "rootNamespace": "",
+    "references": [
+        "GUID:58c0bd628446d7941b907f6be42d2298"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
