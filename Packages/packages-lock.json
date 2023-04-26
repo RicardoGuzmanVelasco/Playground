@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "79bd3bc80bdbd61ee2a4b3b44e53a5cc07a0fbaa"
     },
+    "com.svermeulen.extenject": {
+      "version": "9.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.1",
       "depth": 1,
