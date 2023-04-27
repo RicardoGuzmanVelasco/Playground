@@ -20,6 +20,8 @@ public class TitlesEntryPoint : MonoBehaviour
     TMP_Text everything;
     TMP_Text @is;
     TMP_Text quiet;
+    
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -32,6 +34,8 @@ public class TitlesEntryPoint : MonoBehaviour
         everything = GameObject.Find("Everything").GetComponent<TMP_Text>();
         @is = GameObject.Find("Is").GetComponent<TMP_Text>();
         quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
+        
+        audioSource = FindObjectOfType<AudioSource>();
     }
 
     async void Start()
@@ -39,12 +43,15 @@ public class TitlesEntryPoint : MonoBehaviour
         HideThingsToBeginWith();
         
         await FadeInBackground();
+
         await FadeInSignature();
         await Delay(FromSeconds(1));
+        audioSource.Play();
         await FadeOutSignature();
-
+        await Delay(FromSeconds(.5f));
         await SpawnTitle();
 
+        await Delay(FromSeconds(2));
         await SlideInAuthorFromLeft();
     }
 
