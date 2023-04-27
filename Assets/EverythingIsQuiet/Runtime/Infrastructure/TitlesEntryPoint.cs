@@ -50,12 +50,23 @@ public class TitlesEntryPoint : MonoBehaviour
 
         await FadeInSignature();
         await SyncWithTheme();
+        await ScrathSignature();
         await FadeOutSignature();
         
         await SpawnTitle();
         
         await TheMusicToStart();
         await SlideInAuthorFromLeft();
+    }
+
+    async Task ScrathSignature()
+    {
+        await Sequence()
+            .Append(signature.transform.DORotate(Vector3.forward * -30, .1f).SetEase(OutQuad))
+            .AppendInterval(.2f)
+            .Append(signature.transform.DORotate(Vector3.forward * 15, .1f).SetEase(OutQuad))
+            .Append(signature.transform.DORotate(Vector3.forward * 0, .1f).SetEase(OutQuad))
+            .AsyncWaitForCompletion();
     }
 
     static Task TheMusicToStart()
@@ -67,11 +78,11 @@ public class TitlesEntryPoint : MonoBehaviour
     {
         await Delay(FromSeconds(1));
         audioSource.Play();
+        await Delay(FromSeconds(.35));
     }
 
     async Task SpawnTitle()
     {
-        await Delay(FromSeconds(.75f));
         Compose(every);
         await Delay(FromSeconds(.2f));
         await Compose(thing).AsyncWaitForCompletion();
@@ -103,7 +114,8 @@ public class TitlesEntryPoint : MonoBehaviour
     
     Task FadeOutSignature()
     {
-        return signature.DOFade(0, .5f).SetEase(InQuad).AsyncWaitForCompletion();
+        signature.DOFade(0, 0).Complete();
+        return Task.CompletedTask;
     }
 
     Task FadeInBackground()
