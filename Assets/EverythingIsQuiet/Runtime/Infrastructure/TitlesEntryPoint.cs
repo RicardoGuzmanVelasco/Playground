@@ -60,7 +60,7 @@ namespace EverythingIsQuiet.Infrastructure
 
             await TheMusicToStart();
             await SlideInAuthorFromLeft();
-            
+
             await EndOfTheNextBar();
             await ScaleUpContinueButton();
         }
@@ -69,12 +69,13 @@ namespace EverythingIsQuiet.Infrastructure
         {
             @continue.transform.DOScaleY(1, 0f).Complete();
             await @continue.transform.DOScaleX(1, .25f).SetEase(OutBack).AsyncWaitForCompletion();
-            
-            Sequence()
-                .AppendInterval(.5f)
-                .Append(@continue.transform.DOScale(1.1f, .25f).SetEase(InOutSine))
-                .Append(@continue.transform.DOScale(1, .25f).SetEase(InOutSine))
-                .SetLoops(-1, LoopType.Yoyo);
+
+            await Sequence()
+                .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
+                .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
+                .AppendInterval(.2f)
+                .SetLoops(-1, LoopType.Restart)
+                .AsyncWaitForElapsedLoops(1);
         }
 
 
@@ -88,9 +89,6 @@ namespace EverythingIsQuiet.Infrastructure
                 .AsyncWaitForCompletion();
         }
 
-        static Task TheMusicToStart() => Delay(FromSeconds(1.5));
-        static Task EndOfTheNextBar() => Delay(FromSeconds(1.75f));
-
         async Task SyncWithTheme()
         {
             await Delay(FromSeconds(1));
@@ -100,10 +98,13 @@ namespace EverythingIsQuiet.Infrastructure
 
         async Task SpawnTitle()
         {
+            await Delay(FromSeconds(.25f));
             Compose(every);
             await Delay(FromSeconds(.2f));
             await Compose(thing).AsyncWaitForCompletion();
+            await Delay(FromSeconds(.1f));
             await Compose(@is).AsyncWaitForCompletion();
+            await Delay(FromSeconds(.2f));
             await Compose(quiet).AsyncWaitForCompletion();
 
             Sequence Compose(TMP_Text text)
@@ -111,7 +112,7 @@ namespace EverythingIsQuiet.Infrastructure
                 return Sequence()
                     .AppendCallback(() => text.alpha = 1)
                     .Append(text.DOFadeInCharEm(.1f).SetEase(OutExpo))
-                    .AppendInterval(.35f);
+                    .AppendInterval(.2f);
             }
         }
 
@@ -140,6 +141,9 @@ namespace EverythingIsQuiet.Infrastructure
             return background.DOFade(1, 1f).From(0).SetEase(InOutSine).AsyncWaitForCompletion();
         }
 
+        static Task TheMusicToStart() => Delay(FromSeconds(1.25));
+        static Task EndOfTheNextBar() => Delay(FromSeconds(1.75f));
+
         void HideThingsToBeginWith()
         {
             signature.DOFade(0, 0).Complete();
@@ -151,7 +155,7 @@ namespace EverythingIsQuiet.Infrastructure
 
             gameBy.rectTransform.DOAnchorPosX(-1000, 0).Complete();
             author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
-            
+
             @continue.transform.DOScale(0, 0f).Complete();
         }
     }
