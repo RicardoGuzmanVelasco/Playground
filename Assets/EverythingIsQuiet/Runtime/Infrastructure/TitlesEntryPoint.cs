@@ -71,9 +71,11 @@ namespace EverythingIsQuiet.Infrastructure
             await @continue.transform.DOScaleX(1, .25f).SetEase(OutBack).AsyncWaitForCompletion();
 
             await Sequence()
-                .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
-                .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
-                .AppendInterval(.2f)
+                .Append(Sequence()
+                    .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
+                    .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
+                    .AppendInterval(.2f)
+                    .SetLoops(4, LoopType.Restart))
                 .SetLoops(-1, LoopType.Restart)
                 .AsyncWaitForElapsedLoops(1);
         }
@@ -142,7 +144,7 @@ namespace EverythingIsQuiet.Infrastructure
         }
 
         static Task TheMusicToStart() => Delay(FromSeconds(1.25));
-        static Task EndOfTheNextBar() => Delay(FromSeconds(1.75f));
+        static Task EndOfTheNextBar() => Delay(FromSeconds(.5f));
 
         void HideThingsToBeginWith()
         {
