@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +22,8 @@ public class TitlesEntryPoint : MonoBehaviour
     TMP_Text everything;
     TMP_Text @is;
     TMP_Text quiet;
+    
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -32,6 +36,8 @@ public class TitlesEntryPoint : MonoBehaviour
         everything = GameObject.Find("Everything").GetComponent<TMP_Text>();
         @is = GameObject.Find("Is").GetComponent<TMP_Text>();
         quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
+        
+        audioSource = FindObjectOfType<AudioSource>();
     }
 
     async void Start()
@@ -39,22 +45,37 @@ public class TitlesEntryPoint : MonoBehaviour
         HideThingsToBeginWith();
         
         await FadeInBackground();
-        await FadeInSignature();
-        await Delay(FromSeconds(1));
-        await FadeOutSignature();
 
+        await FadeInSignature();
+        await SyncWithTheme();
+        await FadeOutSignature();
         await SpawnTitle();
 
+        await TheMusicToStart();
         await SlideInAuthorFromLeft();
+    }
+
+    static Task TheMusicToStart()
+    {
+        return Delay(FromSeconds(2));
+    }
+
+    async Task SyncWithTheme()
+    {
+        await Delay(FromSeconds(1));
+        audioSource.Play();
     }
 
     Task SpawnTitle()
     {
         return Sequence()
-            .Append(everything.DOFade(1, .5f).From(0).SetEase(InQuint))
-            .Append(@is.DOFade(1, .5f).From(0).SetEase(InQuint))
-            .Append(quiet.DOFade(1, .5f).From(0).SetEase(InQuint))
-            .AsyncWaitForCompletion();
+            .AppendInterval(.5f)
+            .Append(Fade(everything)).Append(Fade(@is)).Append(Fade(quiet)).AsyncWaitForCompletion();
+        
+        TweenerCore<Color, Color, ColorOptions> Fade(Graphic text)
+        {
+            return text.DOFade(1, .5f).From(0).SetEase(OutExpo);
+        }
     }
 
     Task SlideInAuthorFromLeft()
