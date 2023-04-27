@@ -19,7 +19,8 @@ public class TitlesEntryPoint : MonoBehaviour
     TMP_Text gameBy;
     TMP_Text author;
 
-    TMP_Text everything;
+    TMP_Text every;
+    TMP_Text thing;
     TMP_Text @is;
     TMP_Text quiet;
     
@@ -33,7 +34,8 @@ public class TitlesEntryPoint : MonoBehaviour
         gameBy = GameObject.Find("GameBy").GetComponent<TMP_Text>();
         author = GameObject.Find("Me").GetComponent<TMP_Text>();
         
-        everything = GameObject.Find("Everything").GetComponent<TMP_Text>();
+        every = GameObject.Find("Every").GetComponent<TMP_Text>();
+        thing = GameObject.Find("Thing").GetComponent<TMP_Text>();
         @is = GameObject.Find("Is").GetComponent<TMP_Text>();
         quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
         
@@ -49,15 +51,16 @@ public class TitlesEntryPoint : MonoBehaviour
         await FadeInSignature();
         await SyncWithTheme();
         await FadeOutSignature();
+        
         await SpawnTitle();
-
+        
         await TheMusicToStart();
         await SlideInAuthorFromLeft();
     }
 
     static Task TheMusicToStart()
     {
-        return Delay(FromSeconds(2));
+        return Delay(FromSeconds(1.5));
     }
 
     async Task SyncWithTheme()
@@ -66,15 +69,21 @@ public class TitlesEntryPoint : MonoBehaviour
         audioSource.Play();
     }
 
-    Task SpawnTitle()
+    async Task SpawnTitle()
     {
-        return Sequence()
-            .AppendInterval(.5f)
-            .Append(Fade(everything)).Append(Fade(@is)).Append(Fade(quiet)).AsyncWaitForCompletion();
+        await Delay(FromSeconds(.75f));
+        Compose(every);
+        await Delay(FromSeconds(.2f));
+        await Compose(thing).AsyncWaitForCompletion();
+        await Compose(@is).AsyncWaitForCompletion();
+        await Compose(quiet).AsyncWaitForCompletion();
         
-        TweenerCore<Color, Color, ColorOptions> Fade(Graphic text)
+        Sequence Compose(TMP_Text text)
         {
-            return text.DOFade(1, .5f).From(0).SetEase(OutExpo);
+            return Sequence()
+                .AppendCallback(() => text.alpha = 1)
+                .Append(text.DOFadeInCharEm(.1f).SetEase(OutExpo))
+                .AppendInterval(.35f);
         }
     }
 
@@ -106,11 +115,20 @@ public class TitlesEntryPoint : MonoBehaviour
     {
         signature.DOFade(0, 0).Complete();
         
-        everything.DOFade(0, 0).Complete();
+        every.DOFade(0, 0).Complete();
+        thing.DOFade(0, 0).Complete();
         @is.DOFade(0, 0).Complete();
         quiet.DOFade(0, 0).Complete();
 
         gameBy.rectTransform.DOAnchorPosX(-1000, 0).Complete();
         author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
     }
+}
+
+static class Extensions
+{
+    public static Tweener DOFadeInCharEm(this TMP_Text text, float duration)
+    {
+        return To(() => text.characterSpacing, x => text.characterSpacing = x, 0, duration).From(500).SetEase(OutQuad);
+    }   
 }
