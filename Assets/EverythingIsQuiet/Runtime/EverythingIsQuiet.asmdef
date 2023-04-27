@@ -2,7 +2,8 @@
     "name": "EverythingIsQuiet",
     "rootNamespace": "",
     "references": [
-        "GUID:58c0bd628446d7941b907f6be42d2298"
+        "GUID:58c0bd628446d7941b907f6be42d2298",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
