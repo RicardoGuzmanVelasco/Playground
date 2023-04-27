@@ -50,7 +50,7 @@ public class TitlesEntryPoint : MonoBehaviour
 
         await FadeInSignature();
         await SyncWithTheme();
-        await ScrathSignature();
+        await ScratchSignature();
         await FadeOutSignature();
         
         await SpawnTitle();
@@ -59,7 +59,7 @@ public class TitlesEntryPoint : MonoBehaviour
         await SlideInAuthorFromLeft();
     }
 
-    async Task ScrathSignature()
+    async Task ScratchSignature()
     {
         await Sequence()
             .Append(signature.transform.DORotate(Vector3.forward * -30, .1f).SetEase(OutQuad))
