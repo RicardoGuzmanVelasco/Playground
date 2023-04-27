@@ -17,6 +17,10 @@ public class TitlesEntryPoint : MonoBehaviour
     TMP_Text gameBy;
     TMP_Text author;
 
+    TMP_Text everything;
+    TMP_Text @is;
+    TMP_Text quiet;
+
     void Awake()
     {
         background = GameObject.Find("Background").GetComponent<Image>();
@@ -24,6 +28,10 @@ public class TitlesEntryPoint : MonoBehaviour
         
         gameBy = GameObject.Find("GameBy").GetComponent<TMP_Text>();
         author = GameObject.Find("Me").GetComponent<TMP_Text>();
+        
+        everything = GameObject.Find("Everything").GetComponent<TMP_Text>();
+        @is = GameObject.Find("Is").GetComponent<TMP_Text>();
+        quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
     }
 
     async void Start()
@@ -33,8 +41,20 @@ public class TitlesEntryPoint : MonoBehaviour
         await FadeInBackground();
         await FadeInSignature();
         await Delay(FromSeconds(1));
+        await FadeOutSignature();
+
+        await SpawnTitle();
 
         await SlideInAuthorFromLeft();
+    }
+
+    Task SpawnTitle()
+    {
+        return Sequence()
+            .Append(everything.DOFade(1, .5f).From(0).SetEase(InQuint))
+            .Append(@is.DOFade(1, .5f).From(0).SetEase(InQuint))
+            .Append(quiet.DOFade(1, .5f).From(0).SetEase(InQuint))
+            .AsyncWaitForCompletion();
     }
 
     Task SlideInAuthorFromLeft()
@@ -43,12 +63,17 @@ public class TitlesEntryPoint : MonoBehaviour
             .Append(gameBy.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
             .AppendInterval(.5f / 2)
             .Append(author.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
-            .AsyncWaitForElapsedLoops(1);
+            .AsyncWaitForCompletion();
     }
 
     Task FadeInSignature()
     {
         return signature.DOFade(1, .5f).From(0).SetEase(OutQuad).AsyncWaitForCompletion();
+    }
+    
+    Task FadeOutSignature()
+    {
+        return signature.DOFade(0, .5f).SetEase(InQuad).AsyncWaitForCompletion();
     }
 
     Task FadeInBackground()
@@ -59,6 +84,10 @@ public class TitlesEntryPoint : MonoBehaviour
     void HideThingsToBeginWith()
     {
         signature.DOFade(0, 0).Complete();
+        
+        everything.DOFade(0, 0).Complete();
+        @is.DOFade(0, 0).Complete();
+        quiet.DOFade(0, 0).Complete();
 
         gameBy.rectTransform.DOAnchorPosX(-1000, 0).Complete();
         author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
