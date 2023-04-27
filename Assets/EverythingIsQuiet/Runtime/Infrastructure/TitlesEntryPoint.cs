@@ -1,8 +1,5 @@
-using System;
 using System.Threading.Tasks;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,136 +8,151 @@ using static System.TimeSpan;
 using static DG.Tweening.DOTween;
 using static DG.Tweening.Ease;
 
-public class TitlesEntryPoint : MonoBehaviour
+namespace EverythingIsQuiet.Infrastructure
 {
-    Image background;
-    Image signature;
-
-    TMP_Text gameBy;
-    TMP_Text author;
-
-    TMP_Text every;
-    TMP_Text thing;
-    TMP_Text @is;
-    TMP_Text quiet;
-    
-    AudioSource audioSource;
-
-    void Awake()
+    public class TitlesEntryPoint : MonoBehaviour
     {
-        background = GameObject.Find("Background").GetComponent<Image>();
-        signature = GameObject.Find("Signature").GetComponent<Image>();
-        
-        gameBy = GameObject.Find("GameBy").GetComponent<TMP_Text>();
-        author = GameObject.Find("Me").GetComponent<TMP_Text>();
-        
-        every = GameObject.Find("Every").GetComponent<TMP_Text>();
-        thing = GameObject.Find("Thing").GetComponent<TMP_Text>();
-        @is = GameObject.Find("Is").GetComponent<TMP_Text>();
-        quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
-        
-        audioSource = FindObjectOfType<AudioSource>();
-    }
+        Image background;
+        Image signature;
 
-    async void Start()
-    {
-        HideThingsToBeginWith();
-        
-        await FadeInBackground();
+        TMP_Text gameBy;
+        TMP_Text author;
 
-        await FadeInSignature();
-        await SyncWithTheme();
-        await ScratchSignature();
-        await FadeOutSignature();
-        
-        await SpawnTitle();
-        
-        await TheMusicToStart();
-        await SlideInAuthorFromLeft();
-    }
+        TMP_Text every;
+        TMP_Text thing;
+        TMP_Text @is;
+        TMP_Text quiet;
 
-    async Task ScratchSignature()
-    {
-        await Sequence()
-            .Append(signature.transform.DORotate(Vector3.forward * -30, .1f).SetEase(OutQuad))
-            .AppendInterval(.2f)
-            .Append(signature.transform.DORotate(Vector3.forward * 15, .1f).SetEase(OutQuad))
-            .Append(signature.transform.DORotate(Vector3.forward * 0, .1f).SetEase(OutQuad))
-            .AsyncWaitForCompletion();
-    }
+        AudioSource audioSource;
 
-    static Task TheMusicToStart()
-    {
-        return Delay(FromSeconds(1.5));
-    }
+        Button @continue;
 
-    async Task SyncWithTheme()
-    {
-        await Delay(FromSeconds(1));
-        audioSource.Play();
-        await Delay(FromSeconds(.35));
-    }
+        void Awake()
+        {
+            background = GameObject.Find("Background").GetComponent<Image>();
+            signature = GameObject.Find("Signature").GetComponent<Image>();
 
-    async Task SpawnTitle()
-    {
-        Compose(every);
-        await Delay(FromSeconds(.2f));
-        await Compose(thing).AsyncWaitForCompletion();
-        await Compose(@is).AsyncWaitForCompletion();
-        await Compose(quiet).AsyncWaitForCompletion();
-        
-        Sequence Compose(TMP_Text text)
+            gameBy = GameObject.Find("GameBy").GetComponent<TMP_Text>();
+            author = GameObject.Find("Me").GetComponent<TMP_Text>();
+
+            every = GameObject.Find("Every").GetComponent<TMP_Text>();
+            thing = GameObject.Find("Thing").GetComponent<TMP_Text>();
+            @is = GameObject.Find("Is").GetComponent<TMP_Text>();
+            quiet = GameObject.Find("Quiet").GetComponent<TMP_Text>();
+
+            audioSource = FindObjectOfType<AudioSource>();
+
+            @continue = GameObject.Find("Continue").GetComponent<Button>();
+        }
+
+        async void Start()
+        {
+            HideThingsToBeginWith();
+
+            await FadeInBackground();
+
+            await FadeInSignature();
+            await SyncWithTheme();
+            await ScratchSignature();
+            await FadeOutSignature();
+
+            await SpawnTitle();
+
+            await TheMusicToStart();
+            await SlideInAuthorFromLeft();
+            
+            await EndOfTheNextBar();
+            await ScaleUpContinueButton();
+        }
+
+        async Task ScaleUpContinueButton()
+        {
+            @continue.transform.DOScaleY(1, 0f).Complete();
+            await @continue.transform.DOScaleX(1, .25f).SetEase(OutBack).AsyncWaitForCompletion();
+            
+            Sequence()
+                .AppendInterval(.5f)
+                .Append(@continue.transform.DOScale(1.1f, .25f).SetEase(InOutSine))
+                .Append(@continue.transform.DOScale(1, .25f).SetEase(InOutSine))
+                .SetLoops(-1, LoopType.Yoyo);
+        }
+
+
+        async Task ScratchSignature()
+        {
+            await Sequence()
+                .Append(signature.transform.DORotate(Vector3.forward * -30, .1f).SetEase(OutQuad))
+                .AppendInterval(.2f)
+                .Append(signature.transform.DORotate(Vector3.forward * 15, .1f).SetEase(OutQuad))
+                .Append(signature.transform.DORotate(Vector3.forward * 0, .1f).SetEase(OutQuad))
+                .AsyncWaitForCompletion();
+        }
+
+        static Task TheMusicToStart() => Delay(FromSeconds(1.5));
+        static Task EndOfTheNextBar() => Delay(FromSeconds(1.75f));
+
+        async Task SyncWithTheme()
+        {
+            await Delay(FromSeconds(1));
+            audioSource.Play();
+            await Delay(FromSeconds(.35));
+        }
+
+        async Task SpawnTitle()
+        {
+            Compose(every);
+            await Delay(FromSeconds(.2f));
+            await Compose(thing).AsyncWaitForCompletion();
+            await Compose(@is).AsyncWaitForCompletion();
+            await Compose(quiet).AsyncWaitForCompletion();
+
+            Sequence Compose(TMP_Text text)
+            {
+                return Sequence()
+                    .AppendCallback(() => text.alpha = 1)
+                    .Append(text.DOFadeInCharEm(.1f).SetEase(OutExpo))
+                    .AppendInterval(.35f);
+            }
+        }
+
+        Task SlideInAuthorFromLeft()
         {
             return Sequence()
-                .AppendCallback(() => text.alpha = 1)
-                .Append(text.DOFadeInCharEm(.1f).SetEase(OutExpo))
-                .AppendInterval(.35f);
+                .Append(gameBy.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
+                .AppendInterval(.5f / 2)
+                .Append(author.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
+                .AsyncWaitForCompletion();
+        }
+
+        Task FadeInSignature()
+        {
+            return signature.DOFade(1, .5f).From(0).SetEase(OutQuad).AsyncWaitForCompletion();
+        }
+
+        Task FadeOutSignature()
+        {
+            signature.DOFade(0, 0).Complete();
+            return Task.CompletedTask;
+        }
+
+        Task FadeInBackground()
+        {
+            return background.DOFade(1, 1f).From(0).SetEase(InOutSine).AsyncWaitForCompletion();
+        }
+
+        void HideThingsToBeginWith()
+        {
+            signature.DOFade(0, 0).Complete();
+
+            every.DOFade(0, 0).Complete();
+            thing.DOFade(0, 0).Complete();
+            @is.DOFade(0, 0).Complete();
+            quiet.DOFade(0, 0).Complete();
+
+            gameBy.rectTransform.DOAnchorPosX(-1000, 0).Complete();
+            author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
+            
+            @continue.transform.DOScale(0, 0f).Complete();
         }
     }
-
-    Task SlideInAuthorFromLeft()
-    {
-        return Sequence()
-            .Append(gameBy.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
-            .AppendInterval(.5f / 2)
-            .Append(author.rectTransform.DOAnchorPosX(1000, .5f).SetRelative(true))
-            .AsyncWaitForCompletion();
-    }
-
-    Task FadeInSignature()
-    {
-        return signature.DOFade(1, .5f).From(0).SetEase(OutQuad).AsyncWaitForCompletion();
-    }
-    
-    Task FadeOutSignature()
-    {
-        signature.DOFade(0, 0).Complete();
-        return Task.CompletedTask;
-    }
-
-    Task FadeInBackground()
-    {
-        return background.DOFade(1, 1f).From(0).SetEase(InOutSine).AsyncWaitForCompletion();
-    }
-
-    void HideThingsToBeginWith()
-    {
-        signature.DOFade(0, 0).Complete();
-        
-        every.DOFade(0, 0).Complete();
-        thing.DOFade(0, 0).Complete();
-        @is.DOFade(0, 0).Complete();
-        quiet.DOFade(0, 0).Complete();
-
-        gameBy.rectTransform.DOAnchorPosX(-1000, 0).Complete();
-        author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
-    }
-}
-
-static class Extensions
-{
-    public static Tweener DOFadeInCharEm(this TMP_Text text, float duration)
-    {
-        return To(() => text.characterSpacing, x => text.characterSpacing = x, 0, duration).From(500).SetEase(OutQuad);
-    }   
 }
