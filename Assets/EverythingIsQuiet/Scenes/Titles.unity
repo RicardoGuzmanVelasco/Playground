@@ -1013,9 +1013,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You're listening to\n\xABLuv Sic part <font=\"Honey Florist SDF\">5</font>\xBB
-    beat \nby Nujabes.\n\nRIP\nJun Seba\n<font=\"Honey Florist SDF\">1974 - 2010</font>\n(it
-    all started thanks to you)"
+  m_text: "You're listening to\n\xABLuv Sic part V\xBB beat \nby Nujabes.               
+    \n\nRIP     \nJun Seba    \n<font=\"Honey Florist SDF\">1974 - 2010</font>           
+    \n(it all started thanks to you)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26984ca24755d20419823524772a99f4, type: 2}
   m_sharedMaterial: {fileID: -986897791596061826, guid: 26984ca24755d20419823524772a99f4, type: 2}

@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,7 +47,7 @@ namespace EverythingIsQuiet.Infrastructure
             audioSource = FindObjectOfType<AudioSource>();
 
             @continue = GameObject.Find("Continue").GetComponent<Button>();
-            
+
             theme = GameObject.Find("Theme").GetComponent<TMP_Text>();
         }
 
@@ -62,13 +64,53 @@ namespace EverythingIsQuiet.Infrastructure
 
             await SpawnNujabesThemeText();
             await UntilClickOnContinue();
+            await WhenAll(ShakeContinueButton(), CorrectNujabesTextAssumption());
+        }
+
+        async Task CorrectNujabesTextAssumption()
+        {
+            var trimmed = theme.text;
+            while(trimmed.Contains("  "))
+                trimmed = trimmed.Replace("  ", " ");
+            theme.text = trimmed;
+
+            await DOTween.To
+            (
+                getter: () => theme.maxVisibleCharacters,
+                setter: x => theme.maxVisibleCharacters = x,
+                endValue: 0,
+                duration: 2f
+            ).SetEase(Linear).AsyncWaitForCompletion();
+
+            var corrected = theme.text;
+            corrected = corrected.Replace("listening", "<color=#FF0000>supposed to be </color> listening");
+            theme.text = corrected;
+
+            await DOTween.To
+            (
+                getter: () => theme.maxVisibleCharacters,
+                setter: x => theme.maxVisibleCharacters = x,
+                endValue: theme.text.Length,
+                duration: 5f
+            ).SetEase(Linear).AsyncWaitForCompletion();
+        }
+
+        Task ShakeContinueButton()
+        {
+            return @continue.transform
+                .DOShakePosition(duration: .5f, strength: 10, vibrato: 20)
+                .AsyncWaitForCompletion();
         }
 
         async Task SpawnNujabesThemeText()
         {
-            theme.DOFade(1, 0).Complete();
-            await theme.DOFadeInCharEm(6.1f).SetEase(OutExpo).AsyncWaitForCompletion();
-            await Delay(FromSeconds(1));
+            await DOTween.To
+            (
+                getter: () => theme.maxVisibleCharacters,
+                setter: x => theme.maxVisibleCharacters = x,
+                endValue: theme.text.Length,
+                duration: 10f
+            ).SetEase(Linear).AsyncWaitForCompletion();
         }
 
         Task FadeOutTitle()
@@ -115,12 +157,12 @@ namespace EverythingIsQuiet.Infrastructure
         {
             var fade = @continue.GetComponent<TMP_Text>().DOFade(1, .5f).SetAutoKill(false);
             await fade.AsyncWaitForCompletion();
-            
+
             var tcs = new TaskCompletionSource<bool>();
             @continue.onClick.AddListener(() => tcs.SetResult(true));
             await tcs.Task;
             @continue.onClick.RemoveAllListeners();
-            
+
             fade.PlayBackwards();
             await fade.AsyncWaitForCompletion();
         }
@@ -132,9 +174,9 @@ namespace EverythingIsQuiet.Infrastructure
 
             await Sequence()
                 .Append(Sequence()
+                    .AppendInterval(.25f)
                     .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
                     .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
-                    .AppendInterval(.25f)
                     .SetLoops(4, LoopType.Restart))
                 .SetLoops(-1, LoopType.Restart)
                 .AsyncWaitForElapsedLoops(1);
@@ -219,8 +261,8 @@ namespace EverythingIsQuiet.Infrastructure
             author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
 
             @continue.transform.DOScale(0, 0f).Complete();
-            
-            theme.DOFade(0, 0).Complete();
+
+            theme.maxVisibleCharacters = 0;
         }
     }
 }
