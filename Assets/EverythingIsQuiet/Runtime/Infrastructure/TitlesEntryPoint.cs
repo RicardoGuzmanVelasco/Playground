@@ -65,6 +65,8 @@ namespace EverythingIsQuiet.Infrastructure
             await SpawnNujabesThemeText();
             await UntilClickOnContinue();
             await WhenAll(ShakeContinueButton(), CorrectNujabesTextAssumption());
+
+            await UntilClickOnContinue();
         }
 
         async Task CorrectNujabesTextAssumption()
@@ -155,7 +157,7 @@ namespace EverythingIsQuiet.Infrastructure
 
         async Task UntilClickOnContinue()
         {
-            var fade = @continue.GetComponent<TMP_Text>().DOFade(1, .5f).SetAutoKill(false);
+            var fade = @continue.GetComponent<TMP_Text>().DOFade(1, .15f).SetAutoKill(false);
             await fade.AsyncWaitForCompletion();
 
             var tcs = new TaskCompletionSource<bool>();
@@ -172,14 +174,27 @@ namespace EverythingIsQuiet.Infrastructure
             @continue.transform.DOScaleY(1, 0f).Complete();
             await @continue.transform.DOScaleX(1, .25f).SetEase(OutBack).AsyncWaitForCompletion();
 
-            await Sequence()
+            Sequence()
+                .Append(Sequence()
+                    .AppendInterval(.25f)
+                    .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
+                    .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
+                    .SetLoops(3, LoopType.Restart))
+                .Append(Sequence()
+                    .AppendInterval(.25f)
+                    .Append(@continue.transform.DOScale(1.05f, .1f).SetEase(Linear))
+                    .Append(@continue.transform.DOScale(1, .1f).SetEase(Linear))
+                    .Append(@continue.transform.DOScale(1.05f, .1f).SetEase(Linear))
+                    .Append(@continue.transform.DOScale(1, .1f).SetEase(Linear))
+                    .SetLoops(1, LoopType.Restart))
                 .Append(Sequence()
                     .AppendInterval(.25f)
                     .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
                     .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
                     .SetLoops(4, LoopType.Restart))
-                .SetLoops(-1, LoopType.Restart)
-                .AsyncWaitForElapsedLoops(1);
+                .SetLoops(-1, LoopType.Restart);
+
+            await Delay(FromSeconds((.25f + 2 * .2f) * 3));
         }
 
 
