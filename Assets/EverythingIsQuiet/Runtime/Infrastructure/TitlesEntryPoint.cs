@@ -27,6 +27,8 @@ namespace EverythingIsQuiet.Infrastructure
 
         Button @continue;
 
+        TMP_Text theme;
+
         void Awake()
         {
             background = GameObject.Find("Background").GetComponent<Image>();
@@ -43,6 +45,8 @@ namespace EverythingIsQuiet.Infrastructure
             audioSource = FindObjectOfType<AudioSource>();
 
             @continue = GameObject.Find("Continue").GetComponent<Button>();
+            
+            theme = GameObject.Find("Theme").GetComponent<TMP_Text>();
         }
 
         async void Start()
@@ -55,6 +59,16 @@ namespace EverythingIsQuiet.Infrastructure
             await UntilClickOnContinue();
 
             await WhenAll(FadeOutAuthor(), FadeOutTitle());
+
+            await SpawnNujabesThemeText();
+            await UntilClickOnContinue();
+        }
+
+        async Task SpawnNujabesThemeText()
+        {
+            theme.DOFade(1, 0).Complete();
+            await theme.DOFadeInCharEm(6.1f).SetEase(OutExpo).AsyncWaitForCompletion();
+            await Delay(FromSeconds(1));
         }
 
         Task FadeOutTitle()
@@ -205,6 +219,8 @@ namespace EverythingIsQuiet.Infrastructure
             author.rectTransform.DOAnchorPosX(-1000, 0).Complete();
 
             @continue.transform.DOScale(0, 0f).Complete();
+            
+            theme.DOFade(0, 0).Complete();
         }
     }
 }
