@@ -49,13 +49,35 @@ namespace EverythingIsQuiet.Infrastructure
         {
             HideThingsToBeginWith();
 
-            await FadeInBackground();
+            await Signature();
+            await Splash();
 
-            await FadeInSignature();
-            await SyncWithTheme();
-            await ScratchSignature();
-            await FadeOutSignature();
+            await UntilClickOnContinue();
 
+            await WhenAll(FadeOutAuthor(), FadeOutTitle());
+        }
+
+        Task FadeOutTitle()
+        {
+            return WhenAll
+            (
+                every.DOFade(0, .5f).SetEase(OutQuad).AsyncWaitForCompletion(),
+                thing.DOFade(0, .5f).SetEase(OutQuad).AsyncWaitForCompletion(),
+                @is.DOFade(0, .5f).SetEase(OutQuad).AsyncWaitForCompletion(),
+                quiet.DOFade(0, .5f).SetEase(OutQuad).AsyncWaitForCompletion()
+            );
+        }
+
+        async Task FadeOutAuthor()
+        {
+            await Sequence()
+                .Append(gameBy.rectTransform.DOAnchorPosX(-1000, .5f).SetRelative(true))
+                .Join(author.rectTransform.DOAnchorPosX(-1000, .5f).SetRelative(true))
+                .AsyncWaitForCompletion();
+        }
+
+        async Task Splash()
+        {
             await SpawnTitle();
 
             await TheMusicToStart();
@@ -63,6 +85,30 @@ namespace EverythingIsQuiet.Infrastructure
 
             await EndOfTheNextBar();
             await ScaleUpContinueButton();
+        }
+
+        async Task Signature()
+        {
+            await FadeInBackground();
+
+            await FadeInSignature();
+            await SyncWithTheme();
+            await ScratchSignature();
+            await FadeOutSignature();
+        }
+
+        async Task UntilClickOnContinue()
+        {
+            var fade = @continue.GetComponent<TMP_Text>().DOFade(1, .5f).SetAutoKill(false);
+            await fade.AsyncWaitForCompletion();
+            
+            var tcs = new TaskCompletionSource<bool>();
+            @continue.onClick.AddListener(() => tcs.SetResult(true));
+            await tcs.Task;
+            @continue.onClick.RemoveAllListeners();
+            
+            fade.PlayBackwards();
+            await fade.AsyncWaitForCompletion();
         }
 
         async Task ScaleUpContinueButton()
@@ -74,7 +120,7 @@ namespace EverythingIsQuiet.Infrastructure
                 .Append(Sequence()
                     .Append(@continue.transform.DOScale(1.05f, .2f).SetEase(Linear))
                     .Append(@continue.transform.DOScale(1, .2f).SetEase(Linear))
-                    .AppendInterval(.2f)
+                    .AppendInterval(.25f)
                     .SetLoops(4, LoopType.Restart))
                 .SetLoops(-1, LoopType.Restart)
                 .AsyncWaitForElapsedLoops(1);
@@ -135,7 +181,7 @@ namespace EverythingIsQuiet.Infrastructure
         Task FadeOutSignature()
         {
             signature.DOFade(0, 0).Complete();
-            return Task.CompletedTask;
+            return CompletedTask;
         }
 
         Task FadeInBackground()
@@ -143,7 +189,7 @@ namespace EverythingIsQuiet.Infrastructure
             return background.DOFade(1, 1f).From(0).SetEase(InOutSine).AsyncWaitForCompletion();
         }
 
-        static Task TheMusicToStart() => Delay(FromSeconds(1.25));
+        static Task TheMusicToStart() => Delay(FromSeconds(1.5));
         static Task EndOfTheNextBar() => Delay(FromSeconds(.5f));
 
         void HideThingsToBeginWith()
