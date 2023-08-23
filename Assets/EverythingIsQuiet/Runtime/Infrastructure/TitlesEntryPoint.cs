@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
@@ -143,6 +144,9 @@ namespace EverythingIsQuiet.Infrastructure
 
             await EndOfTheNextBar();
             await ScaleUpContinueButton();
+            
+            //Sync with end of the first 4 bars, so is sync with the first double-blink of the button contine.
+            await Task.Delay(TimeSpan.FromSeconds(.5f));
         }
 
         async Task Signature()
