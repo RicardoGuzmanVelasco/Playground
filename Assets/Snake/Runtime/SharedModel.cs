@@ -18,7 +18,7 @@ public class SharedModel : MonoBehaviour
 
     async Task OneTick()
     {
-        await Task.Delay(TimeSpan.FromSeconds(CurrentStepFrequency) * Time.timeScale);
+        await Task.Delay(TimeSpan.FromSeconds(CurrentStepFrequency) * Time.timeScale, destroyCancellationToken);
         Model = Model.Tick();
     }
 
