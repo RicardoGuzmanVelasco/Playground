@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DG.Tweening;
@@ -10,20 +11,20 @@ public class TextualSnake : MonoBehaviour
 {
     TMP_Text GameOverLabel => GetComponentsInChildren<TMP_Text>(includeInactive: true)
         .Single(x => x.name == "GameOverLabel");
+
     TMP_Text TextualView => GetComponentsInChildren<TMP_Text>()
         .Single(x => x.name == "TextualView");
-    
+
     SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
     void Update()
     {
         if(GameOverLabel.gameObject.activeInHierarchy)
             return;
-        
+
         if(Game.GameOver)
             PrintGameOver();
-        else
-            PrintGame();
+        PrintGame();
     }
 
     void PrintGameOver()
@@ -39,15 +40,28 @@ public class TextualSnake : MonoBehaviour
         for(var y = SnakeGame.MapSize - 1; y >= 0; y--)
         {
             for(var x = 0; x < SnakeGame.MapSize; x++)
-                result.Append(Print(x, y));
+                result.Append(Print(x, y, GameOrLastTickWhenIsGameOver()));
 
             result.AppendLine();
         }
-        
+
         TextualView.text = result.ToString();
     }
 
-    string Print(int x, int y) => (x, y).Equals(Game.Fruit) ? "*" : PrintNoFruit(x, y);
-    string PrintNoFruit(int x, int y) => Game.ExistsSnakeAt((x, y)) ? PrintSnake(x, y) : "·";
-    string PrintSnake(int x, int y) => (x, y).Equals(Game.Snake.First()) ? "O" : "o";
+    SnakeGame GameOrLastTickWhenIsGameOver() => Game.GameOver ? Game.Undo().Undo() : Game;
+
+    static string Print(int x, int y, SnakeGame snakeGame)
+        => (x, y).Equals(snakeGame.Fruit)
+            ? "*"
+            : PrintNoFruit(x, y, snakeGame);
+
+    static string PrintNoFruit(int x, int y, SnakeGame game)
+        => game.ExistsSnakeAt((x, y))
+            ? PrintSnake(x, y, game.Snake)
+            : "·";
+
+    static string PrintSnake(int x, int y, IEnumerable<Coordinate> snake)
+        => (x, y).Equals(snake.First())
+            ? "O"
+            : "o";
 }
