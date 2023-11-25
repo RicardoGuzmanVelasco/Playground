@@ -3,10 +3,6 @@
 public class ViewSwitcher : MonoBehaviour
 {
     CircularIndex currentView = new(maxIndex: 3);
-    
-    bool CanvasViewIsEnabled => currentView == 0;
-    bool WorldViewIsEnabled => currentView == 1;
-    bool RendererViewIsEnabled => currentView == 2;
 
     void Awake() => ToggleActiveView();
 
@@ -24,9 +20,9 @@ public class ViewSwitcher : MonoBehaviour
 
     void ToggleActiveView()
     {
-        ToggleViewOf<Canvas>(to: CanvasViewIsEnabled);
-        ToggleViewOf<WorldViewSnake>(to: WorldViewIsEnabled);
-        ToggleViewOf<GuiRendererSnake>(to: RendererViewIsEnabled);
+        ToggleViewOf<Canvas>(to: currentView == 0);
+        ToggleViewOf<WorldViewSnake>(to: currentView == 1);
+        ToggleViewOf<GuiRendererSnake>(to: currentView == 2);
     }
     
     void ToggleViewOf<T>(bool to) where T : Component
