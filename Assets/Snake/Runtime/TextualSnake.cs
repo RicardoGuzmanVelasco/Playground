@@ -16,7 +16,7 @@ public class TextualSnake : MonoBehaviour
         .Single(x => x.name == "TextualView");
 
     SnakeGame Game => FindObjectOfType<SharedModel>().Model;
-
+    
     void Update()
     {
         if(GameOverLabel.gameObject.activeInHierarchy)
