@@ -18,7 +18,7 @@ public class SharedModel : MonoBehaviour
 
     async Task OneTick()
     {
-        await Task.Delay(CurrentTimeToTick(), destroyCancellationToken);
+        await Task.Delay(CurrentTimeToTick());
         Model = Model.Tick();
     }
 
