@@ -27,12 +27,17 @@ public class SharedModel : MonoBehaviour
     void ListenDirectionInput()
     {
         if(Input.GetKeyDown(KeyCode.UpArrow))
-            Model = Model.LookTowards((0, 1));
+            Model = Model.LookTowards(Vector2Int.up.ToTuple());
         else if(Input.GetKeyDown(KeyCode.DownArrow))
-            Model = Model.LookTowards((0, -1));
+            Model = Model.LookTowards(Vector2Int.down.ToTuple());
         else if(Input.GetKeyDown(KeyCode.LeftArrow))
-            Model = Model.LookTowards((1, 0));
+            Model = Model.LookTowards(Vector2Int.left.ToTuple());
         else if(Input.GetKeyDown(KeyCode.RightArrow))
-            Model = Model.LookTowards((-1, 0));
+            Model = Model.LookTowards(Vector2Int.right.ToTuple());
     }
+}
+
+public static class Bridge
+{
+    public static (int x, int y) ToTuple(this Vector2Int vector) => (vector.x, vector.y);
 }
