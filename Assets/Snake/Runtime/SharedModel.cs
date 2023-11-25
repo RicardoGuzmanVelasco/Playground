@@ -8,7 +8,7 @@ public class SharedModel : MonoBehaviour
     [SerializeField] float stepFrequencyToBeginWith = 0.5f;
     float CurrentStepFrequency => stepFrequencyToBeginWith / (Model.Snake.Count);
     
-    public SnakeGame Model { get; private set; } = SnakeGame.NewGame;
+    public SnakeGame Model { get; private set; } = SnakeGame.NewGameFrom((2, 2));
 
     async void Start()
     {
@@ -18,7 +18,7 @@ public class SharedModel : MonoBehaviour
 
     async Task OneTick()
     {
-        await Task.Delay(TimeSpan.FromSeconds(CurrentStepFrequency) * Time.timeScale)
+        await Task.Delay(TimeSpan.FromSeconds(CurrentStepFrequency) * Time.timeScale);
         Model = Model.Tick();
     }
 
