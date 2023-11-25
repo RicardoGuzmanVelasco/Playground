@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using Snake;
 using TMPro;
@@ -7,6 +8,11 @@ using UnityEngine;
 public class TextualSnake : MonoBehaviour
 {
     const int HardcodedMapSize = 10;
+
+    TMP_Text GameOverLabel => GetComponentsInChildren<TMP_Text>(includeInactive: true)
+        .Single(x => x.name == "GameOverLabel");
+    TMP_Text TextualView => GetComponentsInChildren<TMP_Text>()
+        .Single(x => x.name == "TextualView");
     
     SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
@@ -20,7 +26,8 @@ public class TextualSnake : MonoBehaviour
 
     void PrintGameOver()
     {
-        GetComponentInChildren<TMP_Text>().text = "Game Over";
+        GameOverLabel.gameObject.SetActive(true);
+        TextualView.color = Color.gray;
     }
 
     void PrintGame()
@@ -37,6 +44,6 @@ public class TextualSnake : MonoBehaviour
             result.AppendLine();
         }
         
-        GetComponentInChildren<TMP_Text>().text = result.ToString();
+        TextualView.text = result.ToString();
     }
 }
