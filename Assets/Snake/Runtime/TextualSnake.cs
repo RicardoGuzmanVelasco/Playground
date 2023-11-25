@@ -10,7 +10,18 @@ public class TextualSnake : MonoBehaviour
     
     SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
-    void Update() => PrintGame();
+    void Update()
+    {
+        if(Game.GameOver)
+            PrintGameOver();
+        else
+            PrintGame();
+    }
+
+    void PrintGameOver()
+    {
+        GetComponentInChildren<TMP_Text>().text = "Game Over";
+    }
 
     void PrintGame()
     {
