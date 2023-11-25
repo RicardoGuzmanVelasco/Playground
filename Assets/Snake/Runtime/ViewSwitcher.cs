@@ -2,12 +2,11 @@
 
 public class ViewSwitcher : MonoBehaviour
 {
-    const int TotalViews = 3;
-    int currentViewIndex = 3;
+    CircularIndex currentView = new(maxIndex: 3);
     
-    bool CanvasViewIsEnabled => currentViewIndex % TotalViews == 0;
-    bool WorldViewIsEnabled => currentViewIndex % TotalViews == 1;
-    bool RendererViewIsEnabled => currentViewIndex % TotalViews == 2;
+    bool CanvasViewIsEnabled => currentView == 0;
+    bool WorldViewIsEnabled => currentView == 1;
+    bool RendererViewIsEnabled => currentView == 2;
 
     void Awake() => ToggleActiveView();
 
@@ -19,7 +18,7 @@ public class ViewSwitcher : MonoBehaviour
 
     void SwitchView()
     {
-        currentViewIndex++;
+        currentView.Increment();
         ToggleActiveView();
     }
 
