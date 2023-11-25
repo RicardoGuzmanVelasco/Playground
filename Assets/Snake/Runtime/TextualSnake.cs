@@ -36,7 +36,7 @@ public class TextualSnake : MonoBehaviour
     void PrintGame()
     {
         var result = new StringBuilder();
-        for(var y = 0; y < SnakeGame.MapSize; y++)
+        for(var y = SnakeGame.MapSize - 1; y >= 0; y--)
         {
             for(var x = 0; x < SnakeGame.MapSize; x++)
                 result.Append(Print(x, y));
