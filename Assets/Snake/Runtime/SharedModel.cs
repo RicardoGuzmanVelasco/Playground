@@ -9,7 +9,7 @@ public class SharedModel : MonoBehaviour
     [SerializeField] bool speedUpWhenEating = true;
     
     public SnakeGame Model { get; private set; } = SnakeGame.NewGameFrom((2, 2));
-    float CurrentStepFrequency => stepFrequencyToBeginWith / (speedUpWhenEating ? 1 : Model.Snake.Count);
+    float CurrentStepFrequency => stepFrequencyToBeginWith / (speedUpWhenEating ? Model.Snake.Count : 1);
 
     async void Start()
     {
