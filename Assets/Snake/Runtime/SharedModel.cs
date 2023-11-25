@@ -6,9 +6,10 @@ using UnityEngine;
 public class SharedModel : MonoBehaviour
 {
     [SerializeField] float stepFrequencyToBeginWith = 0.5f;
-    float CurrentStepFrequency => stepFrequencyToBeginWith / (Model.Snake.Count);
+    [SerializeField] bool speedUpWhenEating = true;
     
     public SnakeGame Model { get; private set; } = SnakeGame.NewGameFrom((2, 2));
+    float CurrentStepFrequency => stepFrequencyToBeginWith / (speedUpWhenEating ? 1 : Model.Snake.Count);
 
     async void Start()
     {
