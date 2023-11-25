@@ -6,6 +6,7 @@ using DG.Tweening;
 using Snake;
 using TMPro;
 using UnityEngine;
+using static System.Linq.Enumerable;
 
 public class TextualSnake : MonoBehaviour
 {
@@ -34,18 +35,20 @@ public class TextualSnake : MonoBehaviour
         TextualView.DOColor(Color.gray, 2f);
     }
 
-    void PrintGame()
+    void PrintGame() => TextualView.text = BuildBoardText();
+
+    string BuildBoardText()
     {
         var result = new StringBuilder();
-        for(var y = SnakeGame.MapSize - 1; y >= 0; y--)
-        {
-            for(var x = 0; x < SnakeGame.MapSize; x++)
-                result.Append(Print(x, y, GameOrLastTickWhenIsGameOver()));
+        Range(0, SnakeGame.MapSize).Reverse().ToList().ForEach(i => PrintOneRow(result, i));
+        return result.ToString();
+    }
 
-            result.AppendLine();
-        }
-
-        TextualView.text = result.ToString();
+    void PrintOneRow(StringBuilder result, int y)
+    {
+        Range(0, SnakeGame.MapSize).ToList()
+            .ForEach(x => result.Append(Print(x, y, GameOrLastTickWhenIsGameOver())));
+        result.AppendLine();
     }
 
     SnakeGame GameOrLastTickWhenIsGameOver() => Game.GameOver ? Game.Undo().Undo() : Game;
