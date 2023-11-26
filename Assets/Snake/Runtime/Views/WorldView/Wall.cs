@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-internal class WorldViewWall : MonoBehaviour
+internal class Wall : MonoBehaviour
 {
     [SerializeField] GameObject wallPrefab;
     

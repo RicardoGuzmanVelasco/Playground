@@ -8,7 +8,7 @@ public class WorldViewSnake : MonoBehaviour
 
     void Awake()
     {
-        FindObjectOfType<WorldViewWall>().BuildFor(SnakeGame.MapSize);
+        FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
     }
 
     void OnEnable()

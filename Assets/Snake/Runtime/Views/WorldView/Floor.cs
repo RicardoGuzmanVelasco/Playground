@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-internal class WorldViewFloor : MonoBehaviour
+internal class Floor : MonoBehaviour
 {
     [SerializeField] GameObject floorPrefab;
 }
