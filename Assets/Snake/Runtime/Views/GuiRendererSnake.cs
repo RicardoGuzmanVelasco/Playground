@@ -1,13 +1,14 @@
-﻿using System;
-using Snake;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GuiRendererSnake : MonoBehaviour
+namespace Snake.Runtime.Views
 {
-    SnakeGame Game => FindObjectOfType<SharedModel>().Model;
-
-    void OnEnable()
+    public class GuiRendererSnake : MonoBehaviour
     {
-        Debug.LogError("Esta vista no está hecha");
+        SnakeGame Game => FindObjectOfType<SharedModel>().Model;
+
+        void OnEnable()
+        {
+            Debug.LogError("Esta vista no está hecha");
+        }
     }
 }

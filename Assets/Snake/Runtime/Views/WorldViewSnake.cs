@@ -1,18 +1,20 @@
-using System;
-using Snake;
+using Snake.Runtime.Views.WorldView;
 using UnityEngine;
 
-public class WorldViewSnake : MonoBehaviour
+namespace Snake.Runtime.Views
 {
-    SnakeGame Game => FindObjectOfType<SharedModel>().Model;
-
-    void Awake()
+    public class WorldViewSnake : MonoBehaviour
     {
-        FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
-    }
+        SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
-    void OnEnable()
-    {
-        Debug.LogError("Esta vista no está hecha");
+        void Awake()
+        {
+            FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
+        }
+
+        void OnEnable()
+        {
+            Debug.LogError("Esta vista no está hecha");
+        }
     }
 }

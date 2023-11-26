@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-internal class Floor : MonoBehaviour
+namespace Snake.Runtime.Views.WorldView
 {
-    [SerializeField] GameObject floorPrefab;
-    
-    public void BuildFor(int mapSize)
+    internal class Floor : MonoBehaviour
     {
-        for(var x = mapSize.OneEdge(); x <= mapSize.OtherEdge(); x++)
+        [SerializeField] GameObject floorPrefab;
+    
+        public void BuildFor(int mapSize)
+        {
+            for(var x = mapSize.OneEdge(); x <= mapSize.OtherEdge(); x++)
             for(var y = mapSize.OneEdge(); y <= mapSize.OtherEdge(); y++)
                 SpawnFloor(x, y);
-    }
+        }
 
-    void SpawnFloor(int i, int i1)
-    {
-        throw new System.NotImplementedException();
+        void SpawnFloor(int i, int i1)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
