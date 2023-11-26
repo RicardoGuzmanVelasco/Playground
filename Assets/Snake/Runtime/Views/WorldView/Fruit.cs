@@ -1,5 +1,4 @@
-﻿using ModestTree;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Snake.Runtime.Views.WorldView
 {
