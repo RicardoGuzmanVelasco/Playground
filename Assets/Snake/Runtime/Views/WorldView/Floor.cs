@@ -8,8 +8,8 @@ namespace Snake.Runtime.Views.WorldView
     
         public void BuildFor(int mapSize)
         {
-            for(var x = mapSize.OneEdge(); x <= mapSize.OtherEdge(); x++)
-            for(var y = mapSize.OneEdge(); y <= mapSize.OtherEdge(); y++)
+            for(var x = mapSize.MinEdge(); x <= mapSize.MaxEdge(); x++)
+            for(var y = mapSize.MinEdge(); y <= mapSize.MaxEdge(); y++)
                 SpawnFloor(x, y);
         }
 

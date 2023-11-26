@@ -8,7 +8,7 @@
                y == -mapSize / 2 ||
                y == mapSize / 2 - 1;
 
-        public static int OneEdge(this int mapSize) => -mapSize / 2;
-        public static int OtherEdge(this int mapSize) => mapSize / 2 - 1;
+        public static int MinEdge(this int mapSize) => -mapSize / 2;
+        public static int MaxEdge(this int mapSize) => mapSize / 2 - 1;
     }
 }

@@ -16,7 +16,7 @@ namespace Snake.Runtime.Views
         void Start()
         {
             var coord = new Vector2(Game.Fruit.X, Game.Fruit.Y);
-            var worldPosition = coord - Vector2.one * ( 1 + SnakeGame.MapSize.OtherEdge());
+            var worldPosition = coord - Vector2.one * ( 1 + SnakeGame.MapSize.MaxEdge());
             SpawnFruitAt(worldPosition);
         }
 
