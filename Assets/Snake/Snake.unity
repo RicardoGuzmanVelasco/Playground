@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6681662c18964f6cac0520afcf308d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitPrefab: {fileID: 0}
 --- !u!1 &650671360
 GameObject:
   m_ObjectHideFlags: 0
