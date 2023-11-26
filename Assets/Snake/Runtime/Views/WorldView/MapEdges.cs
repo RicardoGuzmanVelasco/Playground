@@ -1,4 +1,7 @@
-﻿namespace Snake.Runtime.Views.WorldView
+﻿using System;
+using UnityEngine;
+
+namespace Snake.Runtime.Views.WorldView
 {
     internal static class MapEdges
     {
@@ -10,5 +13,7 @@
 
         public static int MinEdge(this int mapSize) => -mapSize / 2;
         public static int MaxEdge(this int mapSize) => mapSize / 2 - 1;
+
+        public static Vector2 Offset(this int mapSize) => Vector2.one * (1 + mapSize.MaxEdge());
     }
 }
