@@ -12,29 +12,34 @@ namespace Snake.Runtime.Views
         SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
         void Awake() => SpawnWorld();
-
-        void Start()
-        {
-            SpawnFruit();
-        }
-
+        void Start() => SpawnFruit();
+        void Update() => MoveFruit();
+        
         void SpawnFruit()
         {
-            var coord = new Vector2(Game.Fruit.X, Game.Fruit.Y);
-            var worldPosition = coord - Vector2.one * (1 + SnakeGame.MapSize.MaxEdge());
-            SpawnFruitAt(worldPosition);
+            var fruit = Instantiate(fruitPrefab, FruitWorldPosition(), Quaternion.identity, transform);
+            fruit.name = "Fruit";
         }
 
-        void SpawnFruitAt(Vector2 position)
+        void MoveFruit()
         {
-            Assert.IsNotNull(fruitPrefab);
-            Instantiate(fruitPrefab, position, Quaternion.identity, transform);
+            var fruit = GameObject.Find("Fruit");
+            Assert.IsNotNull(fruit);
+            
+            fruit.transform.localPosition = FruitWorldPosition();
         }
 
         static void SpawnWorld()
         {
             FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
             FindObjectOfType<Floor>().BuildFor(SnakeGame.MapSize);
+        }
+        
+        Vector2 FruitWorldPosition()
+        {
+            var coord = new Vector2(Game.Fruit.X, Game.Fruit.Y);
+            var worldPosition = coord - Vector2.one * (1 + SnakeGame.MapSize.MaxEdge());
+            return worldPosition;
         }
     }
 }
