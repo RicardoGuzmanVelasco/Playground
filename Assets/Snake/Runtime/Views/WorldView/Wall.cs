@@ -9,11 +9,13 @@ namespace Snake.Runtime.Views.WorldView
     
         public void BuildFor(int mapSize)
         {
+            var mapBounds = mapSize + 2;
             Assert.IsNotNull(wallPrefab);
         
-            for(var x = mapSize.OneEdge(); x <= mapSize.OtherEdge(); x++)
-            for(var y = mapSize.OneEdge(); y <= mapSize.OtherEdge(); y++)
-                ;
+            for(var x = mapBounds.OneEdge(); x <= mapBounds.OtherEdge(); x++)
+            for(var y = mapBounds.OneEdge(); y <= mapBounds.OtherEdge(); y++)
+                if(mapBounds.IsEdge(x, y))
+                    SpawnBrick(x, y);
         }
 
         void SpawnBrick(int x, int y)
