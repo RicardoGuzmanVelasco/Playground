@@ -16,6 +16,9 @@ namespace Snake.Runtime.Views.WorldView
 
         void MoveSnake()
         {
+            if(Game.GameOver)
+                return;
+            
             FindObjectsOfType<SnakePart>().Select(x => x.gameObject).ToList().ForEach(Destroy);
             SpawnSnake();
         }

@@ -1,6 +1,4 @@
-﻿    using UnityEngine;
-
-namespace Snake.Runtime.Views.WorldView
+﻿namespace Snake.Runtime.Views.WorldView
 {
     internal class SnakeBody : SnakePart
     {
