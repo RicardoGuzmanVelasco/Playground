@@ -31,10 +31,5 @@ namespace Snake.Runtime.Views
             FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
             FindObjectOfType<Floor>().BuildFor(SnakeGame.MapSize);
         }
-
-        void OnEnable()
-        {
-            Debug.LogError("Esta vista no está hecha");
-        }
     }
 }
