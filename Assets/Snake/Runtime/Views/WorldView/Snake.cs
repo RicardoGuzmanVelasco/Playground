@@ -6,8 +6,8 @@ namespace Snake.Runtime.Views.WorldView
 {
     internal class Snake : MonoBehaviour
     {
-        [SerializeField] GameObject snakeBodyPrefab;
-        [SerializeField] GameObject snakeHeadPrefab;
+        [SerializeField] SnakeBody snakeBodyPrefab;
+        [SerializeField] SnakeHead snakeHeadPrefab;
 
         SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
@@ -16,11 +16,7 @@ namespace Snake.Runtime.Views.WorldView
 
         void MoveSnake()
         {
-            FindObjectsOfType<GameObject>()
-                .Where(x => x.name == "SnakePart")
-                .ToList()
-                .ForEach(Destroy);
-            
+            FindObjectsOfType<SnakePart>().Select(x => x.gameObject).ToList().ForEach(Destroy);
             SpawnSnake();
         }
 
@@ -32,9 +28,12 @@ namespace Snake.Runtime.Views.WorldView
 
         void SpawnSnakePart(Coordinate snakePart)
         {
-            var snakePartPrefab = Game.Head.Equals(snakePart) ? snakeHeadPrefab : snakeBodyPrefab;
+            var snakePartPrefab = SnakePartPrefab(snakePart);
             var part = Instantiate(snakePartPrefab, snakePart.Offset(SnakeGame.MapSize), Quaternion.identity, transform);
             part.name = "SnakePart";
         }
+
+        SnakePart SnakePartPrefab(Coordinate snakePart)
+            => Game.Head.Equals(snakePart) ? snakeHeadPrefab : snakeBodyPrefab;
     }
 }

@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4345578b9c9e4528ab83685f11742dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeBodyPrefab: {fileID: 245130033834097103, guid: 25479ab54d1827d4394859012de7a815, type: 3}
-  snakeHeadPrefab: {fileID: 2723436191967781286, guid: 9e174cb2530e0064fb493f7f26a40185, type: 3}
+  snakeBodyPrefab: {fileID: 9054677155504105942, guid: 25479ab54d1827d4394859012de7a815, type: 3}
+  snakeHeadPrefab: {fileID: 5654528768565921802, guid: 9e174cb2530e0064fb493f7f26a40185, type: 3}
 --- !u!1 &650671360
 GameObject:
   m_ObjectHideFlags: 0
