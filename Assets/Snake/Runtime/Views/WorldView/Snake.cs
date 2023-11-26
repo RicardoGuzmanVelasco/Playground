@@ -19,8 +19,13 @@ namespace Snake.Runtime.Views.WorldView
             if(Game.GameOver)
                 return;
             
-            FindObjectsOfType<SnakePart>().Select(x => x.gameObject).ToList().ForEach(Destroy);
+            CleanLastSnake();
             SpawnSnake();
+        }
+
+        static void CleanLastSnake()
+        {
+            FindObjectsOfType<SnakePart>().Select(x => x.gameObject).ToList().ForEach(Destroy);
         }
 
         void SpawnSnake()
