@@ -8,10 +8,21 @@ namespace Snake.Runtime.Views.WorldView
     {
         [SerializeField] GameObject snakeBodyPrefab;
         [SerializeField] GameObject snakeHeadPrefab;
-        
+
         SnakeGame Game => FindObjectOfType<SharedModel>().Model;
 
         void Start() => SpawnSnake();
+        void Update() => MoveSnake();
+
+        void MoveSnake()
+        {
+            FindObjectsOfType<GameObject>()
+                .Where(x => x.name == "SnakePart")
+                .ToList()
+                .ForEach(Destroy);
+            
+            SpawnSnake();
+        }
 
         void SpawnSnake()
         {
@@ -22,7 +33,7 @@ namespace Snake.Runtime.Views.WorldView
         void SpawnSnakePart(Coordinate snakePart)
         {
             var snakePartPrefab = Game.Head.Equals(snakePart) ? snakeHeadPrefab : snakeBodyPrefab;
-            var part = Instantiate(snakePartPrefab, snakePart.Offset(), Quaternion.identity, transform);
+            var part = Instantiate(snakePartPrefab, snakePart.Offset(SnakeGame.MapSize), Quaternion.identity, transform);
             part.name = "SnakePart";
         }
     }

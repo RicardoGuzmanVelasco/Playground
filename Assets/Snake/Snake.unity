@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 589766339}
   - component: {fileID: 589766340}
   - component: {fileID: 589766341}
+  - component: {fileID: 589766342}
   m_Layer: 0
   m_Name: WorldView
   m_TagString: Untagged
@@ -275,6 +276,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitPrefab: {fileID: 3762571605861660720, guid: 71e3c5b7c953c674798df73b2796d06e, type: 3}
+--- !u!114 &589766342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589766338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4345578b9c9e4528ab83685f11742dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeBodyPrefab: {fileID: 245130033834097103, guid: 25479ab54d1827d4394859012de7a815, type: 3}
+  snakeHeadPrefab: {fileID: 2723436191967781286, guid: 9e174cb2530e0064fb493f7f26a40185, type: 3}
 --- !u!1 &650671360
 GameObject:
   m_ObjectHideFlags: 0
