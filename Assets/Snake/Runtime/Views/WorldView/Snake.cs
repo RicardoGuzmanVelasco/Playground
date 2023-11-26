@@ -29,8 +29,7 @@ namespace Snake.Runtime.Views.WorldView
         void SpawnSnakePart(Coordinate snakePart)
         {
             var snakePartPrefab = SnakePartPrefab(snakePart);
-            var part = Instantiate(snakePartPrefab, snakePart.Offset(SnakeGame.MapSize), Quaternion.identity, transform);
-            part.name = "SnakePart";
+            Instantiate(snakePartPrefab, snakePart.Offset(SnakeGame.MapSize), Quaternion.identity, transform);
         }
 
         SnakePart SnakePartPrefab(Coordinate snakePart)
