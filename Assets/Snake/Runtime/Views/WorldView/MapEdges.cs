@@ -14,5 +14,6 @@ namespace Snake.Runtime.Views.WorldView
         public static int MaxEdge(this int mapSize) => mapSize / 2 - 1;
 
         public static Vector2 Offset(this int mapSize) => Vector2.one * (1 + mapSize.MaxEdge());
+        public static Vector2 Offset(this Coordinate coord) => Vector2.one * (1 + coord.X);
     }
 }
