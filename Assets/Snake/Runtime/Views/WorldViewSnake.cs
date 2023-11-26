@@ -15,9 +15,9 @@ namespace Snake.Runtime.Views
 
         void Start()
         {
-            var position = new Vector2(Game.Fruit.X, Game.Fruit.Y);
-            position -= Vector2.one * ( 1 + SnakeGame.MapSize.OtherEdge());
-            SpawnFruitAt(position);
+            var coord = new Vector2(Game.Fruit.X, Game.Fruit.Y);
+            var worldPosition = coord - Vector2.one * ( 1 + SnakeGame.MapSize.OtherEdge());
+            SpawnFruitAt(worldPosition);
         }
 
         void SpawnFruitAt(Vector2 position)
