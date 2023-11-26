@@ -10,6 +10,7 @@ namespace Snake.Runtime.Views
         void Awake()
         {
             FindObjectOfType<Wall>().BuildFor(SnakeGame.MapSize);
+            FindObjectOfType<Floor>().BuildFor(SnakeGame.MapSize);
         }
 
         void OnEnable()

@@ -13,7 +13,7 @@ namespace Snake.Runtime.Views.WorldView
         
             for(var x = mapSize.OneEdge(); x <= mapSize.OtherEdge(); x++)
             for(var y = mapSize.OneEdge(); y <= mapSize.OtherEdge(); y++)
-                SpawnBrick(x, y);
+                ;
         }
 
         void SpawnBrick(int x, int y)

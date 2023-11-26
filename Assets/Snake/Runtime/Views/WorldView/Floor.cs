@@ -13,9 +13,10 @@ namespace Snake.Runtime.Views.WorldView
                 SpawnFloor(x, y);
         }
 
-        void SpawnFloor(int i, int i1)
+        void SpawnFloor(int x, int y)
         {
-            throw new System.NotImplementedException();
+            var floor = Instantiate(floorPrefab, transform);
+            floor.transform.localPosition = new(x, y);
         }
     }
 }
