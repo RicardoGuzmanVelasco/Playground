@@ -4,7 +4,7 @@ using static CommitionalConvents.Commit.Type;
 
 namespace CommitionalConvents.Tests;
 
-public class WipTests
+public class Tests
 {
     [Test]
     public void TimeSpent()

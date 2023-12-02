@@ -4,7 +4,7 @@
     {
         public readonly struct Type
         {
-            readonly string id;
+            public readonly string id;
 
             Type(string id) => this.id = id;
 
