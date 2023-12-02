@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using CommitionalConvents;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Commits.Runtime
 {
@@ -20,7 +21,13 @@ namespace Commits.Runtime
         void Update()
         {
             if(producingWip)
-                wipOfThisType = wipOfThisType.Spend(Time.deltaTime, Commit.Type.Feat);
+                wipOfThisType = wipOfThisType.Spend(Time.deltaTime, commitType.ToCommitType());
+
+            UpateTimerTo(TimeSpan.FromSeconds(wipOfThisType.TotalTimeSpent));
         }
+
+        void UpateTimerTo(TimeSpan secondsSpent)
+            => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "TimeSpent").text
+                = secondsSpent.ToString(@"ss\:ff");
     }
 }
