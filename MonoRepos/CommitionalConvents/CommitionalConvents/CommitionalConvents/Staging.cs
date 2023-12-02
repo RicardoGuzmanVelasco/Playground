@@ -7,6 +7,8 @@ namespace CommitionalConvents
         readonly Wip wip;
         
         public float Eta { get; private set; }
+        public float ProportionDone => 1 - Eta / wip.TotalTimeSpent;
+        
         public bool Done => Eta <= 0;
 
         Staging(Wip wip)
