@@ -2,7 +2,7 @@
 
 namespace CommitionalConvents
 {
-    public record CommitType
+    public readonly struct CommitType
     {
         readonly string type;
 
