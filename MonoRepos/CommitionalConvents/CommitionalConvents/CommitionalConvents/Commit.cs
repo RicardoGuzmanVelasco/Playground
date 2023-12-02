@@ -7,8 +7,13 @@ namespace CommitionalConvents
     public partial record Commit
     {
         Dictionary<Commit.Type, float> sizesByType = new();
+        
         public float TotalSize => sizesByType.Values.Sum();
         public bool IsSingle => sizesByType.Count == 1;
+        public IEnumerable<(Commit.Type type, float size)> Sizes
+            => sizesByType
+                .Select(kv => (kv.Key, kv.Value))
+                .OrderByDescending(kv => kv.Item2);
 
         public Commit.Type CommitType
             => IsSingle ? sizesByType.Keys.Single() : Mutate();
