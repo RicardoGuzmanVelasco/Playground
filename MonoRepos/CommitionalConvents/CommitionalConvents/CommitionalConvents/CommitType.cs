@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace CommitionalConvents
+﻿namespace CommitionalConvents
 {
-    public static class Commit
+    public readonly struct Commit
     {
-        public readonly struct Type
+        public record Type
         {
-            readonly string type;
+            readonly string id;
 
-            Type(string type) => this.type = type;
+            Type(string id) => this.id = id;
 
             public static Type Feat => new("feat");
             public static Type Fix => new("fix");
