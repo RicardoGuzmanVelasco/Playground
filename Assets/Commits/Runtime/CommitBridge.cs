@@ -21,6 +21,14 @@ namespace Commits.Runtime
                 "style" => Commit.Type.Style,
                 _ => throw new ArgumentOutOfRangeException(nameof(commitType), commitType, null)
             };
+
+        public static Color Dye(this Commit commit)
+        {
+            if(commit.IsSingle)
+                return commit.CommitType.id.Dye();
+
+            throw new NotImplementedException();
+        }
         
         public static Color Dye(this string commitTypeId)
             => commitTypeId switch
