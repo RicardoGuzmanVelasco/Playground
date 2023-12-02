@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CommitionalConvents
 {
@@ -10,8 +11,11 @@ namespace CommitionalConvents
 
         Wip() { }
         public static Wip Begin() => new();
-
-        public Wip Spend(CommitType type, float time)
+        
+        public float TimeSpentOn(CommitType type)
+            => timeSpent.GetValueOrDefault(type);
+        
+        public Wip Spend(float time, CommitType type)
             => this with
             {
                 timeSpent = new(timeSpent)
@@ -21,7 +25,7 @@ namespace CommitionalConvents
                 TotalTimeSpent = TotalTimeSpent + time
             };
 
-        public float TimeSpentOn(CommitType type)
-            => timeSpent.GetValueOrDefault(type);
+        public Wip Spend(float time, params CommitType[] types)
+            => types.Aggregate(this, (current, type) => current.Spend(time, type));
     }
 }
