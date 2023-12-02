@@ -1,9 +1,17 @@
-﻿using LanguageExt;
+﻿using System.Linq;
+using LanguageExt;
 
 namespace CommitionalConvents
 {
     public partial record Commit
     {
+        Commit.Type Mutate()
+            => MutationOf
+            (
+                distribution.OrderByDescending(x => x.Value).First().Key,
+                distribution.OrderByDescending(x => x.Value).Skip(1).First().Key
+            );
+
         public static Commit.Type MutationOf(Commit.Type first, Commit.Type second)
             => ExistingMutation(first, second)
                 .Match(Some: x => x, None: first);
