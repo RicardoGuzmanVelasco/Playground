@@ -23,5 +23,11 @@ namespace CommitionalConvents
             {
                 timeSpent = new(timeSpent) { [type] = timeSpent.GetValueOrDefault(type) + time }
             };
+
+        public Wip Normalize()
+            => this with
+            {
+                timeSpent = timeSpent.ToDictionary(kv => kv.Key, kv => kv.Value / TotalTimeSpent)
+            };
     }
 }
