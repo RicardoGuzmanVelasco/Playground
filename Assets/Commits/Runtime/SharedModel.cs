@@ -5,7 +5,7 @@ namespace Commits.Runtime
 {
     public class SharedModel : MonoBehaviour
     {
-        const int HardcodedConstantToReplace = 5;
+        const int HardcodedConstantToReplace = 1;
         
         public Wip Wip { get; private set; } = Wip.Begin();
         
