@@ -14,5 +14,6 @@ namespace Commits.Runtime
         public float MinTimeToCommit => HardcodedConstantToReplace;
 
         public void Inject(float time, Commit.Type type) => Wip = Wip.Spend(time, type);
+        public void Commit() => Wip = Wip.Begin();
     }
 }

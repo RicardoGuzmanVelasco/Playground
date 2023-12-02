@@ -1,13 +1,15 @@
-using System;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Threading.Tasks.Task;
+using static System.TimeSpan;
 
 namespace Commits.Runtime
 {
     public class CommitButton : MonoBehaviour
     {
+        SharedModel Model => FindObjectOfType<SharedModel>();
+        
         void Awake() => GetComponentInChildren<Button>().onClick.AddListener(Commit);
         void OnDestroy() => GetComponentInChildren<Button>().onClick.RemoveListener(Commit);
 
@@ -15,8 +17,10 @@ namespace Commits.Runtime
         {
             DisableAllButtons();
             
-            var cooldown = FindObjectOfType<SharedModel>().Wip.TotalTimeSpent;
-            await Task.Delay(TimeSpan.FromSeconds(cooldown) * Time.timeScale); 
+            var cooldown = Model.Wip.TotalTimeSpent;
+            Model.Commit();
+            
+            await Delay(FromSeconds(cooldown * Time.timeScale));
             EnableAllButtons();
         }
 
