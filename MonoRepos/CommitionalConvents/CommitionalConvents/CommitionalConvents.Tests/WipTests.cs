@@ -1,4 +1,5 @@
 using FluentAssertions;
+using static CommitionalConvents.Commit;
 using static CommitionalConvents.Commit.Type;
 
 namespace CommitionalConvents.Tests;
@@ -72,6 +73,22 @@ public class WipTests
         (
             None: Assert.Fail,
             Some: c => c.CommitType.Should().NotBe(Style)
+        );
+    }
+    
+    [Test]
+    public void Commit_OfMultiple_MutatesTheType()
+    {
+        Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c.CommitType.Should().Be(MutationOf(Ci, Docs))
+        );
+        
+        Wip.Begin().Spend(.1f, Ci).Spend(.2f, Docs).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c.CommitType.Should().Be(MutationOf(Docs, Ci))
         );
     }
 }
