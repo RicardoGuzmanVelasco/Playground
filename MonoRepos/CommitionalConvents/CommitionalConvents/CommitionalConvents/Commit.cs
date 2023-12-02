@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CommitionalConvents
 {
@@ -7,6 +9,10 @@ namespace CommitionalConvents
         Dictionary<Commit.Type, float> distribution = new();
         
         public bool IsSingle => distribution.Count == 1;
+        public Commit.Type CommitType
+            => IsSingle
+            ? distribution.Keys.Single()
+            : throw new InvalidOperationException("Commit is not single");
         
         public static Commit Empty => new();
         

@@ -58,4 +58,20 @@ public class WipTests
             Some: c => c[Docs].Should().BeApproximately(1/3f, .001f)
         );
     }
+    
+    [Test]
+    public void Commit_OfSingle_KeepsTheType()
+    {
+        Wip.Begin().Spend(.2f, Ci).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c.CommitType.Should().Be(Ci)
+        );
+        
+        Wip.Begin().Spend(.2f, Ci).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c.CommitType.Should().NotBe(Style)
+        );
+    }
 }
