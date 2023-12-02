@@ -1,8 +1,8 @@
 ﻿namespace CommitionalConvents
 {
-    public readonly struct Commit
+    public partial class Commit
     {
-        public record Type
+        public readonly struct Type
         {
             readonly string id;
 

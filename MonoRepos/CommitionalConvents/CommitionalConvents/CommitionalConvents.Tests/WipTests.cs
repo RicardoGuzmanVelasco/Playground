@@ -23,4 +23,11 @@ public class WipTests
         Wip.Begin().Spend(340f, Build, Docs, Perf).Normalize().TimeSpentOn(Docs).Should().Be(1/3f); 
         Wip.Begin().Spend(340f, Build, Docs, Perf).Normalize().TimeSpentOn(Perf).Should().Be(1/3f);
     }
+
+    [Fact]
+    public void CommitWip()
+    {
+        Wip.Begin().Commit().IsNone.Should().BeTrue();
+        Wip.Begin().Spend(1.45f, Chore).Commit().IsNone.Should().BeFalse();
+    }
 }

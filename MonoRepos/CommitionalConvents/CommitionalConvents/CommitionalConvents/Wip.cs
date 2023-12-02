@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using LanguageExt;
+using static CommitionalConvents.Commit;
 
 namespace CommitionalConvents
 {
@@ -11,13 +14,13 @@ namespace CommitionalConvents
 
         Wip() { }
         public static Wip Begin() => new();
-        
+
         public float TimeSpentOn(Commit.Type type)
             => timeSpent.GetValueOrDefault(type);
 
         public Wip Spend(float time, params Commit.Type[] types)
             => types.Aggregate(this, (current, type) => current.Spend(time, type));
-        
+
         public Wip Spend(float time, Commit.Type type)
             => this with
             {
@@ -29,5 +32,10 @@ namespace CommitionalConvents
             {
                 timeSpent = timeSpent.ToDictionary(kv => kv.Key, kv => kv.Value / TotalTimeSpent)
             };
+
+        public Option<Commit> Commit()
+            => timeSpent.Any()
+                ? Single(timeSpent.Keys.Single())
+                : Option<Commit>.None;
     }
 }
