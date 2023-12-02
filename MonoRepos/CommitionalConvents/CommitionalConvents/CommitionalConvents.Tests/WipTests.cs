@@ -1,5 +1,5 @@
 using FluentAssertions;
-using static CommitionalConvents.CommitType;
+using static CommitionalConvents.Commit.Type;
 
 namespace CommitionalConvents.Tests;
 

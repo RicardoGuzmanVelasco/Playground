@@ -5,20 +5,20 @@ namespace CommitionalConvents
 {
     public record Wip
     {
-        Dictionary<CommitType, float> timeSpent = new();
+        Dictionary<Commit.Type, float> timeSpent = new();
 
         public float TotalTimeSpent => timeSpent.Values.Sum();
 
         Wip() { }
         public static Wip Begin() => new();
         
-        public float TimeSpentOn(CommitType type)
+        public float TimeSpentOn(Commit.Type type)
             => timeSpent.GetValueOrDefault(type);
 
-        public Wip Spend(float time, params CommitType[] types)
+        public Wip Spend(float time, params Commit.Type[] types)
             => types.Aggregate(this, (current, type) => current.Spend(time, type));
         
-        public Wip Spend(float time, CommitType type)
+        public Wip Spend(float time, Commit.Type type)
             => this with
             {
                 timeSpent = new(timeSpent) { [type] = timeSpent.GetValueOrDefault(type) + time }
