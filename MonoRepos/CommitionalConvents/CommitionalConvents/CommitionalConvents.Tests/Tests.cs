@@ -96,4 +96,46 @@ public class Tests
             Some: c => c.CommitType.Should().Be(MutationOf(Docs, Ci))
         );
     }
+
+    [Test]
+    public void Staging_StartsAtWipSize()
+    {
+        Staging.DoWith(Wip.Begin().Spend(2.11f, Ci)).Eta.Should().Be(2.11f);
+    }
+
+    [Test]
+    public void Staging_ReducesEta_OverTime()
+    {
+        Staging.DoWith(Wip.Begin().Spend(983.7f, Ci))
+            .Inject(1f)
+            .Eta.Should().Be(982.7f);
+    }
+    
+    [Test]
+    public void Staging_ReducesEta_UntilZero()
+    {
+        Staging.DoWith(Wip.Begin().Spend(1f, Ci))
+            .Inject(1f)
+            .Eta.Should().Be(0);
+
+        Staging.DoWith(Wip.Begin().Spend(1f, Ci))
+            .Inject(234f)
+            .Eta.Should().Be(0);
+    }
+
+    [Test]
+    public void Staging_Done_WhenEtaIsNotPositive()
+    {
+        Staging.DoWith(Wip.Begin().Spend(1f, Ci))
+            .Inject(1f)
+            .Done.Should().BeTrue();
+        
+        Staging.DoWith(Wip.Begin().Spend(1f, Ci))
+            .Inject(0.9999f)
+            .Done.Should().BeFalse();
+        
+        Staging.DoWith(Wip.Begin().Spend(1f, Ci))
+            .Inject(234f)
+            .Done.Should().BeTrue();
+    }
 }
