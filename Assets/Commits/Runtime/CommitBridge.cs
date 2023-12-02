@@ -1,5 +1,6 @@
 ﻿using System;
 using CommitionalConvents;
+using UnityEngine;
 
 namespace Commits.Runtime
 {
@@ -19,6 +20,20 @@ namespace Commits.Runtime
                 "perf" => Commit.Type.Perf,
                 "style" => Commit.Type.Style,
                 _ => throw new ArgumentOutOfRangeException(nameof(commitType), commitType, null)
+            };
+        
+        public static Color Dye(this string commitTypeId)
+            => commitTypeId switch
+            {
+                "feat" => new Color(.17f, .58f, .91f),
+                "fix" => new Color(.81f, .27f, .25f),
+                "refactor" => new Color(.84f, .79f, .25f),
+                "test" => new Color(.23f, .78f, .28f),
+                "build" => new Color(.81f, .57f, .25f),
+                "chore" => new Color(.8f, .35f, .71f),
+                "ci" => new Color(.5f, .25f, .8f),
+                "docs" => new Color(.25f, .81f, .68f),
+                _ => throw new ArgumentOutOfRangeException(nameof(commitTypeId), commitTypeId, null)
             };
     }
 }

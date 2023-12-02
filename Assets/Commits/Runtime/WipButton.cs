@@ -4,6 +4,7 @@ using CommitionalConvents;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Commits.Runtime
 {
@@ -16,7 +17,7 @@ namespace Commits.Runtime
         public void OnPointerUp(PointerEventData eventData) => producingWip = false;
         public void OnPointerExit(PointerEventData eventData) => producingWip = false;
 
-        void Awake() => RenameButtonType();
+        void Awake() => UpdateButtonType();
 
         void Update()
         {
@@ -33,7 +34,10 @@ namespace Commits.Runtime
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "TimeSpent").text
                 = secondsSpent.ToString(@"ss\:ff");
         
-        void RenameButtonType()
-            => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "CommitType").text = Represented.id;
+        void UpdateButtonType()
+        {
+            GetComponentsInChildren<TMP_Text>().Single(x => x.name == "CommitType").text = Represented.id;
+            GetComponentInChildren<Image>().color = Represented.id.Dye();
+        }
     }
 }
