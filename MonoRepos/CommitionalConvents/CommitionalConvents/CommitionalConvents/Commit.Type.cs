@@ -1,6 +1,6 @@
 ﻿namespace CommitionalConvents
 {
-    public partial class Commit
+    public partial record Commit
     {
         public readonly struct Type
         {

@@ -2,11 +2,17 @@
 
 namespace CommitionalConvents
 {
-    public partial class Commit
+    public partial record Commit
     {
-        readonly Dictionary<Commit.Type, float> distribution = new();
+        Dictionary<Commit.Type, float> distribution = new();
+        public bool IsSingle => distribution.Count == 1;
         
-        public static Commit Single(Commit.Type type)
-            => new() { distribution = { [type] = 1 } };
+        public static Commit Empty => new();
+        
+        public Commit And(float weight, Commit.Type type)
+        => this with
+        {
+            distribution = new(distribution) { [type] = weight }
+        };
     }
 }

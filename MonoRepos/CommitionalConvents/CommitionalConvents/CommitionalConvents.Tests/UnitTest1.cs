@@ -32,7 +32,13 @@ public class Tests
 
         Wip.Begin().Spend(3245, Ci).Commit().Match
         (
-            Some: commit => throw new NotImplementedException(),
+            Some: c => c.IsSingle.Should().BeTrue(),
+            None: Assert.Fail
+        );
+        
+        Wip.Begin().Spend(1.77f, Ci).Spend(.45f, Chore).Commit().Match
+        (
+            Some: c => c.IsSingle.Should().BeFalse(),
             None: Assert.Fail
         );
     }
