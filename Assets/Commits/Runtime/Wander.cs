@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,20 +6,36 @@ namespace Commits.Runtime
 {
     public class Wander : MonoBehaviour
     {
-        public void Endlessly(float speed)
+        float speed;
+        Vector3 target;
+        
+        public void OnDestroy() => Stop();
+
+        void Update()
         {
-            StartCoroutine(WanderInsideMainCamera(speed));
+            transform.position = Vector3.MoveTowards
+            (
+                current: transform.position,
+                target: target,
+                maxDistanceDelta: speed * Time.deltaTime
+            );
         }
 
-        IEnumerator WanderInsideMainCamera(float speed)
+        public void Endlessly(float speed)
+        {
+            this.speed = speed;
+            StartCoroutine(WanderInsideMainCamera());
+        }
+
+        IEnumerator WanderInsideMainCamera()
         {
             while(true)
             {
-                var goalPosition = Camera.main.RandomPointInside();
-
-                transform.position = goalPosition;
-                yield return new WaitForSeconds(1 / speed);
+                target = Camera.main.RandomPointInside();
+                yield return new WaitForSeconds(speed);
             }
         }
+        
+        public void Stop() => StopAllCoroutines();
     }
 }

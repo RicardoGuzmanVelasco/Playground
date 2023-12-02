@@ -10,9 +10,9 @@ namespace Commits.Runtime
     {
         Option<Commit> represented;
 
-        public void Free(Commit model)
+        public void Free(int number, Commit model)
         {
-            Setup(model);
+            Setup(number, model);
             StartWandering(model);
         }
 
@@ -21,7 +21,7 @@ namespace Commits.Runtime
             GetComponent<Wander>().Endlessly(speed: 1 / model.TotalSize);
         }
 
-        void Setup(Commit model)
+        void Setup(int number, Commit model)
         {
             represented = model;
 
@@ -29,6 +29,9 @@ namespace Commits.Runtime
             GetComponentInChildren<TMP_Text>().text = model.CommitType.id;
 
             GetComponentInChildren<SpriteRenderer>().color = model.Dye();
+            
+            GetComponentInChildren<SpriteRenderer>().sortingOrder = number * 10;
+            GetComponentInChildren<TextMeshPro>().sortingOrder = number * 10 + 1;
         }
     }
 }

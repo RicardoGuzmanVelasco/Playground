@@ -9,6 +9,8 @@ namespace Commits.Runtime
     {
         [SerializeField] CommitBubble commitPrefab;
         
+        public int CommitCount => FindObjectsOfType<CommitBubble>().Length;
+        
         void Awake()
         {
             FindObjectOfType<SharedModel>().StagingCompleted += FreeSpawningCommit;
@@ -16,7 +18,7 @@ namespace Commits.Runtime
 
         void FreeSpawningCommit(Commit commit)
         {
-            Instantiate(commitPrefab, transform).Free(commit);
+            Instantiate(commitPrefab, transform).Free(CommitCount, commit);
         }
     }
 }
