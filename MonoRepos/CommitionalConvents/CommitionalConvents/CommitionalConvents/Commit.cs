@@ -18,7 +18,7 @@ namespace CommitionalConvents
         public Commit And(float weight, Commit.Type type)
             => this with { sizesByType = new(sizesByType) { [type] = weight } };
 
-        public float WeightOf(Type type)
+        public float SizeOf(Type type)
             => sizesByType.TryGetValue(type, out var weight) ? weight : 0;
     }
 }

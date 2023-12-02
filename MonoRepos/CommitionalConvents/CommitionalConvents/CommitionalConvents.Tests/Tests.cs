@@ -45,7 +45,7 @@ public class Tests
     }
 
     [Test]
-    public void Commit_KeepWeights()
+    public void Commit_KeepSizes()
     {
         Wip.Begin().Spend(.4f, Ci).Spend(.2f, Fix).Commit().Match
         (
@@ -55,13 +55,13 @@ public class Tests
         Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
         (
             None: Assert.Fail,
-            Some: c => c.WeightOf(Style).Should().Be(0)
+            Some: c => c.SizeOf(Style).Should().Be(0)
         );
         
         Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
         (
             None: Assert.Fail,
-            Some: c => c.WeightOf(Docs).Should().Be(.1f)
+            Some: c => c.SizeOf(Docs).Should().Be(.1f)
         );
     }
     
