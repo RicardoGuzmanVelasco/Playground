@@ -9,7 +9,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "CommitionalConvents.dll"
+        "CommitionalConvents.dll",
+        "LanguageExt.Core.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
