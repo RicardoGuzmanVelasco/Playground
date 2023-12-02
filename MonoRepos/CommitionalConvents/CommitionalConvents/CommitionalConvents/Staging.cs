@@ -1,4 +1,6 @@
 using System;
+using LanguageExt;
+using static LanguageExt.Option<CommitionalConvents.Commit>;
 
 namespace CommitionalConvents
 {
@@ -11,6 +13,7 @@ namespace CommitionalConvents
         public float ProportionDone => Eta / wip.TotalTimeSpent;
         
         public bool Done => Eta <= 0;
+        public Option<Commit> Result => Done ? wip.Commit() : None;
 
         Staging(Wip wip)
         {
