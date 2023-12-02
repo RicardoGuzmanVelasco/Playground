@@ -277,10 +277,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9150275451703582272}
+  - component: {fileID: 3725555505644709553}
   - component: {fileID: 7664099196155398775}
   - component: {fileID: 4768048311707656822}
   - component: {fileID: 7720373952786368661}
-  - component: {fileID: 9168048148895973353}
   m_Layer: 5
   m_Name: WipButton
   m_TagString: Untagged
@@ -309,6 +309,19 @@ RectTransform:
   m_AnchoredPosition: {x: 87, y: -88}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3725555505644709553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6046014699956514085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c870749bb45189583534f3febfdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commitType: 
 --- !u!222 &7664099196155398775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -391,16 +404,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9168048148895973353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6046014699956514085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6afb9fca11d4849881ca4b6cc96c990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  commitType: 
