@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using CommitionalConvents;
 using TMPro;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Commits.Runtime
 {
@@ -18,7 +20,16 @@ namespace Commits.Runtime
 
         void FreeSpawningCommit(Commit commit)
         {
-            Instantiate(commitPrefab, transform).Free(CommitCount, commit);
+            Instantiate
+            (
+                commitPrefab,
+                transform.position,
+                Quaternion.identity,
+                Origin()
+            ).Free(number: CommitCount, commit);
         }
+
+        static Transform Origin()
+            => FindObjectsOfType<Transform>().Single(x => x.name == "Origin");
     }
 }
