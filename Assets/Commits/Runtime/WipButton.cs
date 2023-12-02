@@ -11,7 +11,6 @@ namespace Commits.Runtime
     {
         [SerializeField] string commitType;
 
-        Wip wipOfThisType = Wip.Begin();
         bool producingWip;
 
         public void OnPointerDown(PointerEventData eventData) => producingWip = true;
@@ -21,10 +20,13 @@ namespace Commits.Runtime
         void Update()
         {
             if(producingWip)
-                wipOfThisType = wipOfThisType.Spend(Time.deltaTime, commitType.ToCommitType());
+                FindObjectOfType<SharedModel>().Inject(Time.deltaTime, commitType.ToCommitType());
 
-            UpateTimerTo(TimeSpan.FromSeconds(wipOfThisType.TotalTimeSpent));
+            UpateTimerTo(SecondsSpent());
         }
+
+        TimeSpan SecondsSpent()
+            => TimeSpan.FromSeconds(FindObjectOfType<SharedModel>().Wip.TimeSpentOn(commitType.ToCommitType()));
 
         void UpateTimerTo(TimeSpan secondsSpent)
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "TimeSpent").text
