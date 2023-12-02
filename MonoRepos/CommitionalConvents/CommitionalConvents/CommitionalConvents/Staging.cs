@@ -6,8 +6,9 @@ namespace CommitionalConvents
     {
         readonly Wip wip;
         
+        public float TotalTimeToComplete => wip.TotalTimeSpent;
         public float Eta { get; private set; }
-        public float ProportionDone => 1 - Eta / wip.TotalTimeSpent;
+        public float ProportionDone => Eta / wip.TotalTimeSpent;
         
         public bool Done => Eta <= 0;
 
