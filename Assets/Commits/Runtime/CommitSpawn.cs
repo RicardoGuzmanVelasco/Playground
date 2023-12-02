@@ -1,11 +1,14 @@
 using System;
 using CommitionalConvents;
+using TMPro;
 using UnityEngine;
 
 namespace Commits.Runtime
 {
     public class CommitSpawn : MonoBehaviour
     {
+        [SerializeField] CommitBubble commitPrefab;
+        
         void Awake()
         {
             FindObjectOfType<SharedModel>().StagingCompleted += FreeSpawningCommit;
@@ -13,7 +16,7 @@ namespace Commits.Runtime
 
         void FreeSpawningCommit(Commit commit)
         {
-            Debug.Log($"Spawning commit: {commit.CommitType.id} of {commit.TotalSize} size");
+            Instantiate(commitPrefab, transform).Free(commit);
         }
     }
 }

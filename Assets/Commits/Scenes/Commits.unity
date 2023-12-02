@@ -1588,7 +1588,7 @@ GameObject:
   m_Layer: 0
   m_Name: Staging
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1604,6 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30321927e3046239885ccfaecee8cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commitPrefab: {fileID: 6652681505838234897, guid: 8f2b84b46535ac14295451537718a131, type: 3}
 --- !u!4 &1764817209
 Transform:
   m_ObjectHideFlags: 0
@@ -1613,7 +1614,7 @@ Transform:
   m_GameObject: {fileID: 1764817207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 321.45496, y: 361.88, z: 0.6279082}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
