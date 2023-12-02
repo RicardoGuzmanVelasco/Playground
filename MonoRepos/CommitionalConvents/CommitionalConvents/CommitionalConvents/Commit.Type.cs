@@ -6,7 +6,7 @@
         {
             public readonly string id;
 
-            Type(string id) => this.id = id;
+            internal Type(string id) => this.id = id;
 
             public static Type Feat => new("feat");
             public static Type Fix => new("fix");

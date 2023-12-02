@@ -1,5 +1,4 @@
-﻿using System;
-using LanguageExt;
+﻿using LanguageExt;
 
 namespace CommitionalConvents
 {
@@ -12,6 +11,9 @@ namespace CommitionalConvents
         static Option<Type> ExistingMutation(Type first, Type second)
             => (first.id + second.id) switch
             {
+                "feat" + "refactor" => new Commit.Type("featactor"),
+                "refactor" + "feat" => new Commit.Type("refeat"),
+                "chore" + "fix" => new Commit.Type("chorix"),
                 _ => Option<Type>.None
             };
     }
