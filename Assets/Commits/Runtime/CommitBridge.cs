@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommitionalConvents;
 using UnityEngine;
 
@@ -27,7 +28,9 @@ namespace Commits.Runtime
             if(commit.IsSingle)
                 return commit.CommitType.id.Dye();
 
-            throw new NotImplementedException();
+            var major = commit.Sizes.First();
+            var minor = commit.Sizes.Skip(1).First();
+            return Color.LerpUnclamped(major.type.id.Dye(), minor.type.id.Dye(), minor.size / major.size);
         }
         
         public static Color Dye(this string commitTypeId)

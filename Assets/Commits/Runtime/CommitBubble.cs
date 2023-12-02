@@ -17,10 +17,7 @@ namespace Commits.Runtime
             transform.localScale = Vector3.one * model.TotalSize;
             GetComponentInChildren<TMP_Text>().text = model.CommitType.id;
 
-            if(model.IsSingle)
-                GetComponentInChildren<SpriteRenderer>().color = model.Dye();
-            else
-                throw new NotImplementedException();
+            GetComponentInChildren<SpriteRenderer>().color = model.Dye();
         }
     }
 }
