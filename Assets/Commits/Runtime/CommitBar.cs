@@ -8,7 +8,7 @@ namespace Commits.Runtime
     public class CommitBar : MonoBehaviour
     {
         SharedModel Model => FindObjectOfType<SharedModel>();
-        
+
         void Update()
         {
             UpdateButton();
@@ -20,8 +20,11 @@ namespace Commits.Runtime
             => GetComponentInChildren<Button>().interactable = Model.CanCommit;
 
         void UpdateSlider()
-            => GetComponentInChildren<Slider>().value = Model.ProportionToCommit;
-        
+            => GetComponentInChildren<Slider>().value
+                = Model.IsStaging
+                    ? Model.Staging.ProportionDone
+                    : Model.ProportionToCommit;
+
         void UpdateProportion()
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Proportion").text
                 = $"{Model.Wip.TotalTimeSpent:0.00} / {Model.MinTimeToCommit:0.00}";
