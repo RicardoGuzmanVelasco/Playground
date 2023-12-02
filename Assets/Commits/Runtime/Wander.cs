@@ -21,9 +21,9 @@ namespace Commits.Runtime
             );
         }
 
-        public void Endlessly(float speed)
+        public void Endlessly(float mass)
         {
-            this.speed = speed;
+            this.speed = 1 / mass;
             StartCoroutine(WanderInsideMainCamera());
         }
 
@@ -37,5 +37,14 @@ namespace Commits.Runtime
         }
         
         public void Stop() => StopAllCoroutines();
+        
+        //draw a gizmo of the camera bounds
+        void OnDrawGizmos()
+        {
+            var camera = Camera.main;
+            var cameraWorldBounds = camera.OrthographicBounds();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(cameraWorldBounds.center, cameraWorldBounds.size);
+        }
     }
 }

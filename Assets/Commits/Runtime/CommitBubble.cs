@@ -18,7 +18,7 @@ namespace Commits.Runtime
 
         void StartWandering(Commit model)
         {
-            GetComponent<Wander>().Endlessly(speed: 1 / model.TotalSize);
+            GetComponent<Wander>().Endlessly(mass: model.TotalSize);
         }
 
         void Setup(int number, Commit model)
