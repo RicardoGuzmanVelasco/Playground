@@ -23,9 +23,4 @@ namespace Commits.Runtime
                 wipOfThisType = wipOfThisType.Spend(Time.deltaTime, Commit.Type.Feat);
         }
     }
-
-    public static class CommitBridge
-    {
-        // public static Commit.Type 
-    }
 }
