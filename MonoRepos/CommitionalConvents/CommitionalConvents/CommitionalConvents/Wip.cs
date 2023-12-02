@@ -35,11 +35,8 @@ namespace CommitionalConvents
 
         public Option<Commit> Commit()
             => timeSpent.Any()
-                ? BuildCommit()
+                ? timeSpent.Aggregate(Empty, (current, p)
+                    => current.And(p.Value, p.Key))
                 : Option<Commit>.None;
-
-        Commit BuildCommit()
-            => Normalize().timeSpent
-                .Aggregate(Empty, (current, p) => current.And(p.Value, p.Key));
     }
 }

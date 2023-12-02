@@ -8,8 +8,8 @@ namespace CommitionalConvents
         Commit.Type Mutate()
             => MutationOf
             (
-                distribution.OrderByDescending(x => x.Value).First().Key,
-                distribution.OrderByDescending(x => x.Value).Skip(1).First().Key
+                sizesByType.OrderByDescending(x => x.Value).First().Key,
+                sizesByType.OrderByDescending(x => x.Value).Skip(1).First().Key
             );
 
         public static Commit.Type MutationOf(Commit.Type first, Commit.Type second)

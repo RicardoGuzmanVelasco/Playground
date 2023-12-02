@@ -47,16 +47,21 @@ public class Tests
     [Test]
     public void Commit_KeepWeights()
     {
+        Wip.Begin().Spend(.4f, Ci).Spend(.2f, Fix).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c.TotalSize.Should().Be(.6f)
+        );
         Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
         (
             None: Assert.Fail,
-            Some: c => c[Style].Should().Be(0)
+            Some: c => c.WeightOf(Style).Should().Be(0)
         );
         
         Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
         (
             None: Assert.Fail,
-            Some: c => c[Docs].Should().BeApproximately(1/3f, .001f)
+            Some: c => c.WeightOf(Docs).Should().Be(.1f)
         );
     }
     
