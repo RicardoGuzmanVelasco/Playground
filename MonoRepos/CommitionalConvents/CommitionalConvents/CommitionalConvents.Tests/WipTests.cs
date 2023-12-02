@@ -3,7 +3,7 @@ using static CommitionalConvents.Commit.Type;
 
 namespace CommitionalConvents.Tests;
 
-public class Tests
+public class WipTests
 {
     [Test]
     public void TimeSpent()
@@ -40,6 +40,22 @@ public class Tests
         (
             Some: c => c.IsSingle.Should().BeFalse(),
             None: Assert.Fail
+        );
+    }
+
+    [Test]
+    public void Commit_KeepWeights()
+    {
+        Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c[Style].Should().Be(0)
+        );
+        
+        Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
+        (
+            None: Assert.Fail,
+            Some: c => c[Docs].Should().BeApproximately(1/3f, .001f)
         );
     }
 }
