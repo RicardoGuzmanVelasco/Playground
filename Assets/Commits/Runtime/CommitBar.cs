@@ -28,9 +28,7 @@ namespace Commits.Runtime
         void UpdateProportion()
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Proportion").text
                 = Model.IsStaging
-                ? Proportion(Model.Staging.Eta, Model.Staging.TotalTimeToComplete)
-                : Proportion(Model.Wip.TotalTimeSpent, Model.MinTimeToCommit);
-
-        static string Proportion(float num, float den) => $"{num:0.00} / {den:0.00}";
+                ? Model.Staging.Eta.OutOf(Model.Staging.TotalTimeToComplete)
+                : Model.Wip.TotalTimeSpent.OutOf(Model.MinTimeToCommit);
     }
 }
