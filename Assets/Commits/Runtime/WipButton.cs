@@ -17,7 +17,6 @@ namespace Commits.Runtime
         public void OnPointerExit(PointerEventData eventData) => producingWip = false;
 
         void Awake() => RenameButtonType();
-        void OnValidate() => RenameButtonType();
 
         void Update()
         {
