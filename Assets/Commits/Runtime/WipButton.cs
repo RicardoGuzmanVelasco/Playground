@@ -17,6 +17,9 @@ namespace Commits.Runtime
         public void OnPointerUp(PointerEventData eventData) => producingWip = false;
         public void OnPointerExit(PointerEventData eventData) => producingWip = false;
 
+        void Awake() => RenameButtonType();
+        void OnValidate() => RenameButtonType();
+
         void Update()
         {
             if(producingWip)
@@ -31,5 +34,7 @@ namespace Commits.Runtime
         void UpateTimerTo(TimeSpan secondsSpent)
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "TimeSpent").text
                 = secondsSpent.ToString(@"ss\:ff");
+        
+        void RenameButtonType() => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "CommitType").text = commitType;
     }
 }

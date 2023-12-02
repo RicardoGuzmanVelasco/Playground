@@ -394,9 +394,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1925116056}
     m_Modifications:
+    - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
+      propertyPath: m_text
+      value: feat
+      objectReference: {fileID: 0}
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
-      value: feat
+      value: fix
       objectReference: {fileID: 0}
     - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Color.b
@@ -606,6 +610,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1925116056}
     m_Modifications:
+    - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
+      propertyPath: m_text
+      value: feat
+      objectReference: {fileID: 0}
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: feat
