@@ -138,4 +138,12 @@ public class Tests
             .Inject(234f)
             .Done.Should().BeTrue();
     }
+
+    [Test]
+    public void Origin_KnowsItsMetrics()
+    {
+        Origin.Fresh.TechDebtProportion.Should().Be(0);
+
+        Origin.Fresh.Push(Of(Chore, 34f)).TechDebtProportion.Should().BeGreaterThan(0);
+    }
 }

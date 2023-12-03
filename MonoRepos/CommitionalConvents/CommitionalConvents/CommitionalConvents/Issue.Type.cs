@@ -13,7 +13,7 @@
                 this.counter = counter;
             }
 
-            public static Type Idea => new("idea", Commit.Type.Feat);
+            public static Type ToDo => new("todo", Commit.Type.Feat);
             public static Type Bug => new("bug", Commit.Type.Fix);
             public static Type Debt => new("debt", Commit.Type.Refactor);
             public static Type Qa => new("qa", Commit.Type.Test);
