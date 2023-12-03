@@ -17,17 +17,19 @@ namespace Commits.Runtime
 
         void StartWandering(Issue issue) => GetComponent<Wander>().Endlessly(mass: issue.Size);
 
-        void Setup(int number, Issue issue)
+        void Setup(int number, Issue model)
         {
-            represented = issue;
+            represented = model;
 
-            transform.localScale = Vector3.one * issue.Size;
-            GetComponentInChildren<TMP_Text>().text = issue.IssueType.id;
+            transform.localScale = Vector3.one * model.Size;
+            GetComponentInChildren<TMP_Text>().text = model.IssueType.id;
             
-            GetComponentInChildren<SpriteRenderer>().color = issue.IssueType.counter.id.Dye();
+            GetComponentInChildren<SpriteRenderer>().color = model.IssueType.counter.id.Dye();
             
             GetComponentInChildren<SpriteRenderer>().sortingOrder = number * 5;
             GetComponentInChildren<TextMeshPro>().sortingOrder = number * 5 + 1;
+            
+            name = $"Issue #{number}: {model.IssueType.id} ({model.Size})";
         }
     }
 }

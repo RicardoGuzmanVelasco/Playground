@@ -11,20 +11,24 @@ namespace Commits.Runtime
 
         public int CommitCount => FindObjectsOfType<CommitBubble>().Length;
 
+        public event Action<CommitBubble> Committed;
+
         void Awake()
             => FindObjectOfType<SharedModel>()
                 .StagingCompleted += FreeSpawningCommit;
 
         void FreeSpawningCommit(Commit commit)
-            => Instantiate
+        {
+            var bubble = Instantiate
             (
                 commitPrefab,
                 transform.position,
                 Quaternion.identity,
-                Origin()
-            ).Free(number: CommitCount, commit);
-
-        static Transform Origin()
-            => FindObjectsOfType<Transform>().Single(x => x.name == "Origin");
+                FindObjectsOfType<Transform>().Single(x => x.name == "Origin")
+            );
+            bubble.Free(number: CommitCount, commit);
+            
+            Committed?.Invoke(bubble);
+        }
     }
 }
