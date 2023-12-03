@@ -2,19 +2,16 @@
 {
     public partial record Issue
     {
-        public readonly struct Type
+        public Issue.Type IssueType { get; private set; }
+        public float Size { get; private set; }
+        
+        Issue(float size, Issue.Type type)
         {
-            public readonly string id;
-            
-            internal Type(string id) => this.id = id;
-            
-            public static Type Idea => new("idea");
-            public static Type Bug => new("bug");
-            public static Type Legacy => new("legacy");
-            public static Type Qa => new("qa");
-            
-            public static Type DevOps => new("devops");
-            public static Type Lag => new("lag");
+            Size = size;
+            IssueType = type;
         }
+
+        internal static Issue Emerge(float size, Type type)
+            => new(size, type);
     }
 }
