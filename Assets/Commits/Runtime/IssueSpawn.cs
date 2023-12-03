@@ -36,7 +36,7 @@ namespace Commits.Runtime
             ).Emerge(number: IssueCount, issue: model);
         }
 
-        static Issue RandomIssue() => Issue.Emerge(RandomSize(), RandomType());
+        static Issue RandomIssue() => Issue.Emerge(RandomType(), RandomSize());
 
         static float RandomSize() => Random.Range(0, 5f) / Random.Range(0, 5f);
 
