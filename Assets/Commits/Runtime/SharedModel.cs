@@ -12,8 +12,9 @@ namespace Commits.Runtime
         const int HardcodedConstantToReplace = 1;
 
         public Wip Wip { get; private set; } = Wip.Begin();
-
         public Option<Staging> Staging { get; private set; }
+        public Origin Origin { get; private set; } = Origin.Fresh;
+        
         public event Action<Commit> StagingCompleted;
 
         public bool CanCommit => Wip.TotalTimeSpent >= HardcodedConstantToReplace;
@@ -39,6 +40,7 @@ namespace Commits.Runtime
         void Raise(Commit c)
         {
             StagingCompleted?.Invoke(c);
+            Origin = Origin.Push(c);
             Staging = None;
         }
     }
