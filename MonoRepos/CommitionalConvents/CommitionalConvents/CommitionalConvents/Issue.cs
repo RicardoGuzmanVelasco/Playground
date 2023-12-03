@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using LanguageExt;
+using static LanguageExt.Option<CommitionalConvents.Issue>;
 
 namespace CommitionalConvents
 {
@@ -18,5 +20,14 @@ namespace CommitionalConvents
         
         public bool CounterBy(Commit commit)
             => commit.AllTypes.Any(t => IssueType.counter.Equals(t));
+
+        public Option<Issue> Diminish(Commit commit)
+            => IsDestroyedBy(commit)
+                ? None
+                : this with { Size = ResultSize(commit) };
+
+        bool IsDestroyedBy(Commit commit) => ResultSize(commit) <= 0;
+        float ResultSize(Commit commit)
+            => Size - commit.SizeOf(IssueType.counter);
     }
 }

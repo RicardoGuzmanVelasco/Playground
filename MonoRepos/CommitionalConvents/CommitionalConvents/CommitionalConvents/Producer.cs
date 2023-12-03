@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using LanguageExt;
+using static LanguageExt.Option<CommitionalConvents.Issue>;
 
 namespace CommitionalConvents
 {
@@ -14,9 +15,14 @@ namespace CommitionalConvents
             if(!issue.CounterBy(commit))
                 return (issue, commit);
             
-            return (Option<Issue>.None, commit);
+            return (issue.Diminish(commit), DiminishCommit(commit));
 
             throw new NotImplementedException();
+        }
+
+        static Commit DiminishCommit(Commit commit)
+        {
+            return commit;
         }
     }
 }

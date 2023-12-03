@@ -199,4 +199,18 @@ public class Tests
             None: Assert.Pass
         );
     }
+
+    [Test]
+    public void Producer_DiminishIssue_WhenCommitSizeIsNotEnough()
+    {
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 14f),
+            Stage(13f, Fix)
+        ).issue.Match
+        (
+            Some: r => r.Size.Should().Be(1f),
+            None: Assert.Fail
+        );
+    }
 }
