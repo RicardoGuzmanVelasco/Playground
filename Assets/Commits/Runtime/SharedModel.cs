@@ -42,6 +42,8 @@ namespace Commits.Runtime
             Origin = Origin.Drop(commit);
         }
 
+        public void Create(Issue i) => Origin = Origin.Push(i);
+
         void Raise(Commit c)
         {
             StagingCompleted?.Invoke(c);

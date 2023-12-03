@@ -31,7 +31,7 @@ namespace Commits.Runtime
         void SpawnIssue()
         {
             var model = RandomIssue();
-            FindObjectOfType<SharedModel>().Origin.Push(model);
+            FindObjectOfType<SharedModel>().Create(model);
             
             Instantiate
             (
