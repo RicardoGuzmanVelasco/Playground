@@ -574,7 +574,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: chore
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -583,18 +583,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: feat
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -771,7 +759,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: ci
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -780,18 +768,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: fix
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -937,7 +913,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: docs
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -946,18 +922,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: test
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -1397,7 +1361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: ci
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -1406,18 +1370,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: fix
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -1527,7 +1479,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: build
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -1536,18 +1488,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: test
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -1958,7 +1898,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: fix
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -1967,18 +1907,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: fix
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -2088,7 +2016,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: test
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -2097,18 +2025,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: test
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -2304,27 +2220,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: refactor
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
-      value: 22.9
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: test
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -2429,7 +2333,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: ci
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_fontSize
@@ -2438,18 +2342,6 @@ PrefabInstance:
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: fix
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
@@ -2725,27 +2617,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_text
-      value: feat
-      objectReference: {fileID: 0}
-    - target: {fileID: 878564388198061720, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_fontSize
-      value: 24
+      value: xx
       objectReference: {fileID: 0}
     - target: {fileID: 3725555505644709553, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: commitType
       value: feat
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.26415092
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768048311707656822, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
       objectReference: {fileID: 0}
     - target: {fileID: 6046014699956514085, guid: d3500bfadd86b8f4b8140e7a46a69d9a, type: 3}
       propertyPath: m_Name
