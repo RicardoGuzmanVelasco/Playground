@@ -11,7 +11,7 @@
             IssueType = type;
         }
 
-        internal static Issue Emerge(float size, Type type)
+        public static Issue Emerge(float size, Type type)
             => new(size, type);
     }
 }
