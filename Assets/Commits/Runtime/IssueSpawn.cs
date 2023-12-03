@@ -18,14 +18,22 @@ namespace Commits.Runtime
             while (true)
             {
                 yield return new WaitForSeconds(RythmOfIssues());
-                Instantiate
-                (
-                    issuePrefab,
-                    transform.position,
-                    Quaternion.identity,
-                    Origin()
-                ).Emerge(number: IssueCount, issue: RandomIssue());
+                SpawnIssue();
             }
+        }
+
+        void SpawnIssue()
+        {
+            var model = RandomIssue();
+            FindObjectOfType<SharedModel>().Origin.Push(model);
+            
+            Instantiate
+            (
+                issuePrefab,
+                transform.position,
+                Quaternion.identity,
+                Origin()
+            ).Emerge(number: IssueCount, issue: model);
         }
 
         static Issue RandomIssue() => Issue.Emerge(RandomSize(), RandomType());
