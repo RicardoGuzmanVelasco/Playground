@@ -43,7 +43,7 @@ namespace Commits.Runtime
             Represented = Option<Issue>.None;
             GetComponent<Wander>().Stop();
             
-            transform.DOScale(0, .33f).SetEase(Ease.InBack).SetRelative(true).OnComplete(() => Destroy(gameObject));
+            transform.DOScale(0, .33f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject));
         }
     }
 }
