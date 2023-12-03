@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using FluentAssertions;
 using static CommitionalConvents.Commit;
 using static CommitionalConvents.Commit.Type;
@@ -199,6 +198,30 @@ public class Tests
             None: Assert.Pass
         );
     }
+    
+    [Test]
+    public void Producer_DestroysCommit_WhenCounterSizeIsGreaterOrEqual()
+    {
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 1f),
+            Stage(1f, Fix)
+        ).commit.Match
+        (
+            Some: _ => Assert.Fail(),
+            None: Assert.Pass
+        );
+        
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 23f),
+            Stage(1000f, Ci).And(21f, Fix)
+        ).commit.Match
+        (
+            Some: _ => Assert.Fail(),
+            None: Assert.Pass
+        );
+    }
 
     [Test]
     public void Producer_DiminishIssue_WhenCommitSizeIsNotEnough()
@@ -210,6 +233,34 @@ public class Tests
         ).issue.Match
         (
             Some: r => r.Size.Should().Be(1f),
+            None: Assert.Fail
+        );
+    }
+    
+    [Test]
+    public void Producer_DiminishCommit_WhenIssueSizeIsNotEnough()
+    {
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 5f),
+            Stage(40f, Fix)
+        ).commit.Match
+        (
+            Some: r => r.TotalSize.Should().Be(35f),
+            None: Assert.Fail
+        );
+        
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 5f),
+            Stage(40f, Fix).And(10f, Chore)
+        ).commit.Match
+        (
+            Some: r =>
+            {
+                r.SizeOf(Fix).Should().Be(35f);
+                r.SizeOf(Chore).Should().Be(10f);
+            },
             None: Assert.Fail
         );
     }

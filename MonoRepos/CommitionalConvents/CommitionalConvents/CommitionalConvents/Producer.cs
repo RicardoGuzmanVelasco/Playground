@@ -1,28 +1,16 @@
-﻿using System;
-using System.Linq;
-using LanguageExt;
-using static LanguageExt.Option<CommitionalConvents.Issue>;
+﻿using LanguageExt;
 
 namespace CommitionalConvents
 {
     public record Producer
     {
         public static Producer Basic => new();
-        
+
+        public bool Ignores(Issue issue, Commit commit)
+            => !issue.CounterBy(commit);
+
         public (Option<Issue> issue, Option<Commit> commit)
             Review(Issue issue, Commit commit)
-        {
-            if(!issue.CounterBy(commit))
-                return (issue, commit);
-            
-            return (issue.Diminish(commit), DiminishCommit(commit));
-
-            throw new NotImplementedException();
-        }
-
-        static Commit DiminishCommit(Commit commit)
-        {
-            return commit;
-        }
+            => (issue.Diminish(commit), commit.Diminish(issue.Size, issue.IssueType.counter));
     }
 }
