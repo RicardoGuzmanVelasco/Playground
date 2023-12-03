@@ -1,6 +1,9 @@
 ﻿using System;
 using CommitionalConvents;
+using LanguageExt;
 using UnityEngine;
+using static CommitionalConvents.Staging;
+using static LanguageExt.Option<CommitionalConvents.Staging>;
 
 namespace Commits.Runtime
 {
@@ -10,8 +13,7 @@ namespace Commits.Runtime
 
         public Wip Wip { get; private set; } = Wip.Begin();
 
-        public Staging Staging { get; private set; }
-        public bool IsStaging => Staging != null;
+        public Option<Staging> Staging { get; private set; }
         public event Action<Commit> StagingCompleted;
 
         public bool CanCommit => Wip.TotalTimeSpent >= HardcodedConstantToReplace;
@@ -24,23 +26,20 @@ namespace Commits.Runtime
 
         public void InjectStaging(float time)
         {
-            if(!IsStaging)
-                return;
-
-            Staging = Staging.Inject(time);
-            Staging.Result.IfSome(Raise);
+            Staging = Staging.Map(s => s.Inject(time));
+            Staging.IfSome(x => x.Result.IfSome(Raise));
         }
 
         public void Commit()
         {
-            Staging = Staging.DoWith(Wip);
+            Staging = DoWith(Wip);
             Wip = Wip.Begin();
         }
 
         void Raise(Commit c)
         {
             StagingCompleted?.Invoke(c);
-            Staging = null;
+            Staging = None;
         }
     }
 }

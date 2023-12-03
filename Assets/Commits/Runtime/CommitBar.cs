@@ -21,14 +21,18 @@ namespace Commits.Runtime
 
         void UpdateSlider()
             => GetComponentInChildren<Slider>().value
-                = Model.IsStaging
-                    ? Model.Staging.ProportionDone
-                    : Model.ProportionToCommit;
+                = Model.Staging.Match
+                (
+                    Some: s => s.ProportionDone,
+                    None: () => Model.ProportionToCommit
+                );
 
         void UpdateProportion()
             => GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Proportion").text
-                = Model.IsStaging
-                ? Model.Staging.Eta.OutOf(Model.Staging.TotalTimeToComplete)
-                : Model.Wip.TotalTimeSpent.OutOf(Model.MinTimeToCommit);
+                = Model.Staging.Match
+                (
+                    Some: s => s.Eta.OutOf(s.TotalTimeToComplete),
+                    None: () => Model.Wip.TotalTimeSpent.OutOf(Model.MinTimeToCommit)
+                );
     }
 }
