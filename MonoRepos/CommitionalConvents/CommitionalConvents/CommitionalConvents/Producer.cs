@@ -13,6 +13,8 @@ namespace CommitionalConvents
         {
             if(!issue.CounterBy(commit))
                 return (issue, commit);
+            
+            return (Option<Issue>.None, commit);
 
             throw new NotImplementedException();
         }

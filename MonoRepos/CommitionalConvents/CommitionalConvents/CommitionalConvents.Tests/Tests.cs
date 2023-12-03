@@ -147,9 +147,33 @@ public class Tests
     {
         Origin.Fresh.TechDebtProportion.Should().Be(0);
 
-        Origin.Fresh.Push(Of(Chore, 34f)).TechDebtProportion.Should().Be(0, "commit does not pay tech debt now");
+        Origin.Fresh.Push(Stage(34f, Chore)).TechDebtProportion.Should().Be(0, "commit does not pay tech debt now");
         Origin.Fresh.Push(Emerge(Bug, 34f)).TechDebtProportion.Should().BeGreaterThan(0, "issue is tech debt");
         Origin.Fresh.Push(Emerge(Bug, 34f)).TechDebtProportion.Should().BeLessThan(1, "one issue is not max tech debt");
+    }
+
+    [Test]
+    public void Producer_IgnoresReview_WhenIsNotMatch()
+    {
+        Producer.Basic.Review
+        (
+            Emerge(Doubt, 1f),
+            Stage(1f, Ci)
+        ).issue.Match
+        (
+            Some: r => r.Should().BeEquivalentTo(Emerge(Doubt, 1f)),
+            None: Assert.Fail
+        );
+        
+        Producer.Basic.Review
+        (
+            Emerge(Doubt, 1f),
+            Stage(1f, Ci)
+        ).commit.Match
+        (
+            Some: r => r.Should().BeEquivalentTo(Stage(1f, Ci)),
+            None: Assert.Fail
+        );
     }
 
     [Test]
@@ -157,12 +181,22 @@ public class Tests
     {
         Producer.Basic.Review
         (
-            Emerge(Doubt, 1f),
-            Of(Ci, 1f)
+            Emerge(Bug, 1f),
+            Stage(1f, Fix)
         ).issue.Match
         (
-            Some: r => r.Should().BeEquivalentTo(Emerge(Doubt, 1f)),
-            None: Assert.Fail
+            Some: _ => Assert.Fail(),
+            None: Assert.Pass
+        );
+        
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 23f),
+            Stage(1000f, Ci).And(24f, Fix)
+        ).issue.Match
+        (
+            Some: _ => Assert.Fail(),
+            None: Assert.Pass
         );
     }
 }
