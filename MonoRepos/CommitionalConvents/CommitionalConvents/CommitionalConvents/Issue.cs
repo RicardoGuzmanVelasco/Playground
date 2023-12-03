@@ -1,4 +1,6 @@
-﻿namespace CommitionalConvents
+﻿using System.Linq;
+
+namespace CommitionalConvents
 {
     public partial record Issue
     {
@@ -13,5 +15,8 @@
 
         public static Issue Emerge(Type type, float size)
             => new(size, type);
+        
+        public bool CounterBy(Commit commit)
+            => commit.AllTypes.Any(t => IssueType.counter.Equals(t));
     }
 }

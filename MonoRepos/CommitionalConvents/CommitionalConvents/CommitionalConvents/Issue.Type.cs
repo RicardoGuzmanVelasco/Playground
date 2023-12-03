@@ -1,8 +1,10 @@
-﻿namespace CommitionalConvents
+﻿using System.Linq;
+
+namespace CommitionalConvents
 {
     public partial record Issue
     {
-        public readonly struct Type
+        public record Type
         {
             public readonly string id;
             public readonly Commit.Type counter;

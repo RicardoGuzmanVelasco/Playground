@@ -157,8 +157,12 @@ public class Tests
     {
         Producer.Basic.Review
         (
-            Emerge(Bug, 1f),
-            Of(Bug.counter, 1f)
-        ).issue.IsNone.Should().BeTrue();
+            Emerge(Doubt, 1f),
+            Of(Ci, 1f)
+        ).issue.Match
+        (
+            Some: r => r.Should().BeEquivalentTo(Emerge(Doubt, 1f)),
+            None: Assert.Fail
+        );
     }
 }

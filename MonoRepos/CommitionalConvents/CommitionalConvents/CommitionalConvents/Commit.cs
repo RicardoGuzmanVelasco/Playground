@@ -17,6 +17,9 @@ namespace CommitionalConvents
 
         public Commit.Type CommitType
             => IsSingle ? sizesByType.Keys.Single() : Mutate();
+        
+        public IEnumerable<Commit.Type> AllTypes
+            => sizesByType.Keys;
 
         public static Commit Of(Commit.Type type, float size)
             => Empty.And(size, type);
