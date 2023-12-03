@@ -22,6 +22,12 @@ namespace Commits.Runtime
             }
         }
 
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+                SpawnIssue();
+        }
+
         void SpawnIssue()
         {
             var model = RandomIssue();
