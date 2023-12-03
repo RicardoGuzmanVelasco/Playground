@@ -32,8 +32,10 @@ namespace Commits.Runtime
             while(true)
             {
                 target = Camera.main.RandomPointInside();
-                yield return new WaitForSeconds(speed);
+                yield return new WaitUntil(AtTheTarget);
             }
+            
+            bool AtTheTarget() => Vector2.Distance(transform.position, target) < 0.1f;
         }
         
         public void Stop() => StopAllCoroutines();
