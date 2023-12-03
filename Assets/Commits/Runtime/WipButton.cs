@@ -18,7 +18,7 @@ namespace Commits.Runtime
         public void OnPointerExit(PointerEventData eventData) => producingWip = false;
 
         void Awake() => UpdateButtonType();
-
+        
         void Update()
         {
             if(producingWip)

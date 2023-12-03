@@ -44,6 +44,8 @@ namespace Commits.Runtime
                 "chore" => new Color(.8f, .35f, .71f),
                 "ci" => new Color(.5f, .25f, .8f),
                 "docs" => new Color(.25f, .81f, .68f),
+                "perf" => new Color(.54f, .43f, .34f),
+                "style" => new Color(.25f, .26f, .81f),
                 _ => throw new ArgumentOutOfRangeException(nameof(commitTypeId), commitTypeId, null)
             };
     }
