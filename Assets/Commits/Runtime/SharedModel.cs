@@ -43,12 +43,16 @@ namespace Commits.Runtime
         }
 
         public void Create(Issue i) => Origin = Origin.Push(i);
+        public void Push(Commit c) => Origin = Origin.Push(c);
 
         void Raise(Commit c)
         {
             StagingCompleted?.Invoke(c);
-            Origin = Origin.Push(c);
+            Push(c);
             Staging = None;
         }
+
+
+        public void Close(Issue issue) => Origin = Origin.Close(issue);
     }
 }

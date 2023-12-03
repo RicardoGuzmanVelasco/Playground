@@ -1,4 +1,5 @@
 ﻿using CommitionalConvents;
+using DG.Tweening;
 using LanguageExt;
 using TMPro;
 using UnityEngine;
@@ -19,17 +20,30 @@ namespace Commits.Runtime
 
         void Setup(int number, Issue model)
         {
-            Represented = model;
+            Resize(model);
 
-            transform.localScale = Vector3.one * model.Size;
-            GetComponentInChildren<TMP_Text>().text = model.IssueType.id;
-            
             GetComponentInChildren<SpriteRenderer>().color = model.IssueType.counter.id.Dye();
             
             GetComponentInChildren<SpriteRenderer>().sortingOrder = number * 5;
             GetComponentInChildren<TextMeshPro>().sortingOrder = number * 5 + 1;
             
             name = $"Issue #{number}: {model.IssueType.id} ({model.Size})";
+        }
+
+        public void Resize(Issue model)
+        {
+            Represented = model;
+
+            transform.localScale = Vector3.one * model.Size;
+            GetComponentInChildren<TMP_Text>().text = model.IssueType.id;
+        }
+
+        public void Break()
+        {
+            Represented = Option<Issue>.None;
+            GetComponent<Wander>().Stop();
+            
+            transform.DOScale(0, .33f).SetEase(Ease.InBack).SetRelative(true).OnComplete(() => Destroy(gameObject));
         }
     }
 }

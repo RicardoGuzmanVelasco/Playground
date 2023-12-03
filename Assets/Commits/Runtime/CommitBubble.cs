@@ -23,10 +23,7 @@ namespace Commits.Runtime
 
         void Setup(int number, Commit model)
         {
-            Represented = model;
-
-            transform.localScale = Vector3.one * model.TotalSize;
-            GetComponentInChildren<TMP_Text>().text = model.CommitType.id;
+            Resize(model);
 
             GetComponentInChildren<SpriteRenderer>().color = model.Dye();
             
@@ -34,6 +31,14 @@ namespace Commits.Runtime
             GetComponentInChildren<TextMeshPro>().sortingOrder = number * 10 + 1;
             
             name = $"Commit #{number}: {model.CommitType.id} ({model.TotalSize})";
+        }
+
+        public void Resize(Commit model)
+        {
+            Represented = model;
+            
+            transform.localScale = Vector3.one * model.TotalSize;
+            GetComponentInChildren<TMP_Text>().text = model.CommitType.id;
         }
 
         void OnTriggerEnter2D(Collider2D other)
