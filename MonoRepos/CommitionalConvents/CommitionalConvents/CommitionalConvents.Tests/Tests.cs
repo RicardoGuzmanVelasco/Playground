@@ -1,6 +1,9 @@
+using System.Diagnostics;
 using FluentAssertions;
 using static CommitionalConvents.Commit;
 using static CommitionalConvents.Commit.Type;
+using static CommitionalConvents.Issue;
+using static CommitionalConvents.Issue.Type;
 
 namespace CommitionalConvents.Tests;
 
@@ -144,6 +147,8 @@ public class Tests
     {
         Origin.Fresh.TechDebtProportion.Should().Be(0);
 
-        Origin.Fresh.Push(Of(Chore, 34f)).TechDebtProportion.Should().BeGreaterThan(0);
+        Origin.Fresh.Push(Of(Chore, 34f)).TechDebtProportion.Should().Be(0, "commit does not pay tech debt now");
+        Origin.Fresh.Push(Emerge(Bug, 34f)).TechDebtProportion.Should().BeGreaterThan(0, "issue is tech debt");
+        
     }
 }

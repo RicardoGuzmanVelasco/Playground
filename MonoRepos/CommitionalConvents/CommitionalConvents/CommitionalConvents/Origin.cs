@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using static System.Array;
 
@@ -23,6 +24,7 @@ namespace CommitionalConvents
         
         
         /// Ya me preocuparé de la fórmula.
-        float IssuesToCommitsRatio => issues.Length / (float) commits.Length;
+        float IssuesToCommitsRatio
+            => issues.Length / Math.Max(1f, commits.Length);
     }
 }
