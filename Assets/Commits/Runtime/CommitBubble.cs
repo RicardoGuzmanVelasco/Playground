@@ -1,5 +1,6 @@
 using System;
 using CommitionalConvents;
+using DG.Tweening;
 using LanguageExt;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Commits.Runtime
 {
     public class CommitBubble : MonoBehaviour
     {
-        Option<Commit> represented;
+        public Option<Commit> Represented { get; private set; }
 
         public event Action<CommitBubble, IssueTicket> LinkedToIssue;
 
@@ -22,7 +23,7 @@ namespace Commits.Runtime
 
         void Setup(int number, Commit model)
         {
-            represented = model;
+            Represented = model;
 
             transform.localScale = Vector3.one * model.TotalSize;
             GetComponentInChildren<TMP_Text>().text = model.CommitType.id;
@@ -42,6 +43,16 @@ namespace Commits.Runtime
                 return;
             
             LinkedToIssue?.Invoke(this, ticket);
+        }
+
+        public void Pop()
+        {
+            Represented = Option<Commit>.None;
+            GetComponent<Wander>().Stop();
+            
+            GetComponentInChildren<SpriteRenderer>().DOFade(0, .25f);
+            GetComponentInChildren<TMP_Text>().DOFade(0, .25f);
+            transform.DOScale(2, .33f).SetEase(Ease.InBounce).SetRelative(true).OnComplete(() => Destroy(gameObject));
         }
     }
 }

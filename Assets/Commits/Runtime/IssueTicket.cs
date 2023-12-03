@@ -7,8 +7,8 @@ namespace Commits.Runtime
 {
     public class IssueTicket : MonoBehaviour
     {
-        Option<Issue> represented;
-        
+        public Option<Issue> Represented { get; private set; }
+
         public void Emerge(int number, Issue issue)
         {
             Setup(number, issue);
@@ -19,7 +19,7 @@ namespace Commits.Runtime
 
         void Setup(int number, Issue model)
         {
-            represented = model;
+            Represented = model;
 
             transform.localScale = Vector3.one * model.Size;
             GetComponentInChildren<TMP_Text>().text = model.IssueType.id;
