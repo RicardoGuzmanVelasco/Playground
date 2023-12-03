@@ -16,7 +16,7 @@ namespace CommitionalConvents
             this.commits = commits;
         }
         public static Origin Fresh => new(Empty<Issue>(), Empty<Commit>());
-        public float TechDebtProportion => (IssuesToCommitsRatio - 100) / 100;
+        public float TechDebtProportion => IssuesToCommitsRatio / 100;
 
         public Origin Push(Issue issue)
             => this with { issues = new List<Issue>(issues) { issue }.ToArray() };
@@ -26,6 +26,6 @@ namespace CommitionalConvents
         
         /// Ya me preocuparé de la fórmula.
         float IssuesToCommitsRatio
-            => 100 - issues.Sum(i => i.Size) / (1 + commits.Sum(c => c.TotalSize));
+            => issues.Sum(i => i.Size) / (1 + commits.Sum(c => c.TotalSize));
     }
 }

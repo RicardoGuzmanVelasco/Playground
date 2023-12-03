@@ -39,7 +39,7 @@ public class Tests
             Some: c => c.IsSingle.Should().BeTrue(),
             None: Assert.Fail
         );
-        
+
         Wip.Begin().Spend(1.77f, Ci).Spend(.45f, Chore).Commit().Match
         (
             Some: c => c.IsSingle.Should().BeFalse(),
@@ -60,14 +60,14 @@ public class Tests
             None: Assert.Fail,
             Some: c => c.SizeOf(Style).Should().Be(0)
         );
-        
+
         Wip.Begin().Spend(.2f, Ci).Spend(.1f, Docs).Commit().Match
         (
             None: Assert.Fail,
             Some: c => c.SizeOf(Docs).Should().Be(.1f)
         );
     }
-    
+
     [Test]
     public void Commit_OfSingle_KeepsTheType()
     {
@@ -76,14 +76,14 @@ public class Tests
             None: Assert.Fail,
             Some: c => c.CommitType.Should().Be(Ci)
         );
-        
+
         Wip.Begin().Spend(.2f, Ci).Commit().Match
         (
             None: Assert.Fail,
             Some: c => c.CommitType.Should().NotBe(Style)
         );
     }
-    
+
     [Test]
     public void Commit_OfMultiple_MutatesTheType()
     {
@@ -92,7 +92,7 @@ public class Tests
             None: Assert.Fail,
             Some: c => c.CommitType.Should().Be(MutationOf(Ci, Docs))
         );
-        
+
         Wip.Begin().Spend(.1f, Ci).Spend(.2f, Docs).Commit().Match
         (
             None: Assert.Fail,
@@ -113,7 +113,7 @@ public class Tests
             .Inject(1f)
             .Eta.Should().Be(982.7f);
     }
-    
+
     [Test]
     public void Staging_ReducesEta_UntilZero()
     {
@@ -132,11 +132,11 @@ public class Tests
         Staging.DoWith(Wip.Begin().Spend(1f, Ci))
             .Inject(1f)
             .Done.Should().BeTrue();
-        
+
         Staging.DoWith(Wip.Begin().Spend(1f, Ci))
             .Inject(0.9999f)
             .Done.Should().BeFalse();
-        
+
         Staging.DoWith(Wip.Begin().Spend(1f, Ci))
             .Inject(234f)
             .Done.Should().BeTrue();
@@ -149,6 +149,16 @@ public class Tests
 
         Origin.Fresh.Push(Of(Chore, 34f)).TechDebtProportion.Should().Be(0, "commit does not pay tech debt now");
         Origin.Fresh.Push(Emerge(Bug, 34f)).TechDebtProportion.Should().BeGreaterThan(0, "issue is tech debt");
-        
+        Origin.Fresh.Push(Emerge(Bug, 34f)).TechDebtProportion.Should().BeLessThan(1, "one issue is not max tech debt");
+    }
+
+    [Test]
+    public void Producer_DestroysIssue_WhenCounterCommitCoversTheSize()
+    {
+        Producer.Basic.Review
+        (
+            Emerge(Bug, 1f),
+            Of(Bug.counter, 1f)
+        ).issue.IsNone.Should().BeTrue();
     }
 }
