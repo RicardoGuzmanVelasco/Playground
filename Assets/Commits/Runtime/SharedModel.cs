@@ -36,6 +36,11 @@ namespace Commits.Runtime
             Staging = DoWith(Wip);
             Wip = Wip.Begin();
         }
+        
+        public void Drop(Commit commit)
+        {
+            Origin = Origin.Drop(commit);
+        }
 
         void Raise(Commit c)
         {

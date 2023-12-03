@@ -21,36 +21,36 @@ namespace Commits.Runtime
                     var model = new CommitionalConvents.Producer();
                     Merge(bubble, ticket, model.Review(issue, commit));
                 });
+
+                void Merge(CommitBubble bubble, IssueTicket ticket, (Option<Issue> issue, Option<Commit> commit) review)
+                {
+                    UpdateCommit(bubble, review.commit);
+                    UpdateTicket(ticket, review.issue);
+                }
+
+                void UpdateCommit(CommitBubble bubble, Option<Commit> reviewCommit)
+                    => reviewCommit.Match
+                    (
+                        Some: c => DiminishCommit(c, bubble),
+                        None: DestroyCommit
+                    );
+
+                void DiminishCommit(Commit c, CommitBubble b)
+                {
+                    throw new System.NotImplementedException();
+                }
+
+                void DestroyCommit()
+                {
+                    FindObjectOfType<SharedModel>().Drop(commit);
+                    bubble.Pop();
+                }
+
+                void UpdateTicket(IssueTicket ticket, Option<Issue> reviewIssue)
+                {
+                    throw new System.NotImplementedException();
+                }
             }
-        }
-
-        void Merge(CommitBubble bubble, IssueTicket ticket, (Option<Issue> issue, Option<Commit> commit) review)
-        {
-            UpdateCommit(bubble, review.commit);
-            UpdateTicket(ticket, review.issue);
-        }
-
-        void UpdateCommit(CommitBubble bubble, Option<Commit> reviewCommit)
-            => reviewCommit.Match
-            (
-                Some: c => DiminishCommit(c, bubble),
-                None: () => DestroyCommit(bubble)
-            );
-
-        void DiminishCommit(Commit commit, CommitBubble bubble)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void DestroyCommit(CommitBubble bubble)
-        {
-            bubble.Pop();
-            // FindObjectOfType<SharedModel>().Origin
-        }
-
-        void UpdateTicket(IssueTicket ticket, Option<Issue> reviewIssue)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
