@@ -38,13 +38,10 @@ namespace Commits.Runtime
         
         public void Stop() => StopAllCoroutines();
         
-        //draw a gizmo of the camera bounds
         void OnDrawGizmos()
         {
-            var camera = Camera.main;
-            var cameraWorldBounds = camera.OrthographicBounds();
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(cameraWorldBounds.center, cameraWorldBounds.size);
+            Gizmos.color = GetComponentInChildren<SpriteRenderer>().color;
+            Gizmos.DrawLine(transform.position, target);
         }
     }
 }
