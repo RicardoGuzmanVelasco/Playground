@@ -22,6 +22,8 @@ namespace CommitionalConvents
                 "feat" + "refactor" => new Commit.Type("featactor"),
                 "refactor" + "feat" => new Commit.Type("refeat"),
                 "chore" + "fix" => new Commit.Type("chorix"),
+                "refactor" + "test" => new Commit.Type("retest"),
+                "test" + "refactor" => new Commit.Type("testactor"),
                 _ => Option<Type>.None
             };
     }
