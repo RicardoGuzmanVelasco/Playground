@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using LanguageExt;
+using static LanguageExt.Option<CommitionalConvents.Commit.Type>;
 
 namespace CommitionalConvents
 {
@@ -13,8 +14,7 @@ namespace CommitionalConvents
             );
 
         public static Commit.Type MutationOf(Commit.Type first, Commit.Type second)
-            => ExistingMutation(first, second)
-                .Match(Some: x => x, None: first);
+            => ExistingMutation(first, second).IfNone(first);
 
         static Option<Type> ExistingMutation(Type first, Type second)
             => (first.id + second.id) switch
@@ -24,7 +24,7 @@ namespace CommitionalConvents
                 "chore" + "fix" => new Commit.Type("chorix"),
                 "refactor" + "test" => new Commit.Type("retest"),
                 "test" + "refactor" => new Commit.Type("testactor"),
-                _ => Option<Type>.None
+                _ => None
             };
     }
 }
